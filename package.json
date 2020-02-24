@@ -1,0 +1,43 @@
+{
+  "name": "rzxt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:modern": "vue-cli-service build --modern",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "@riophae/vue-treeselect": "^0.4.0",
+    "@tinymce/tinymce-vue": "^3.0.1",
+    "axios": "^0.19.0",
+    "core-js": "^2.6.5",
+    "dayjs": "^1.8.17",
+    "element-ui": "^2.12.0",
+    "lodash": "^4.17.15",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.4",
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-typescript": "^3.0.5",
+    "@vue/cli-plugin-unit-jest": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "fibers": "^4.0.2",
+    "node-sass": "^4.12.0",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
+    "ts-jest": "^23.0.0",
+    "typescript": "^3.4.3",
+    "vue-property-decorator": "^8.3.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuex-class": "^0.3.2"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "defaultSeverity": "warning",
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**"
+    ]
+  },
+  "rules": {
+    "member-access": false,
+    "variable-name": [
+      false,
+      "check-format",
+      "allow-leading-underscore",
+      "allow-trailing-underscore",
+      "ban-keywords"
+    ],
+    "no-string-literal": false,
+    "no-console": false,
+    "no-unused-expression": false,
+    "no-empty": false,
+    "max-line-length": false,
+    "arrow-parens": [false, "as-needed"],
+    "semicolon": false,
+    "trailing-comma": false,
+    "indent": [true, "spaces", 2],
+    "interface-name": false,
+    "no-consecutive-blank-lines": false,
+    "no-shadowed-variable": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "quotemark": [true, "single"]
+  },
+  "jsRules": {
+    "no-empty": false
+  }
+}

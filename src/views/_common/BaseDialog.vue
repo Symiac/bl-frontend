@@ -99,7 +99,7 @@ export default class BaseDialog extends Vue {
     }
     .base-dialog-form {
       height: auto;
-      margin-top: 15vh !important;     
+      margin-top: 5vh !important;     
       .el-dialog__body {
         padding: 20px 20px 0 20px;
       }

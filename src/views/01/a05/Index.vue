@@ -81,7 +81,11 @@
         <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
           <el-button type="primary" @click="changes">变更</el-button>
         </div>
+        <dialog-add ref="dialogAdd"></dialog-add>
          <dialog-detail ref="dialogDetail"></dialog-detail>
+         <dialog-review ref="dialogReview"></dialog-review>
+         <dialog-change ref="dialogChange"></dialog-change>
+         
       </div>
     </template>
     <template slot="content">
@@ -115,17 +119,27 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
-import DialogDetail from './DialogDetail.vue'
+import dialogAdd from './Dialog.vue'
+import dialogDetail from './DialogDetail.vue'
+import dialogReview from './DialogReview.vue'
+import dialogChange from './DialogChange.vue'
+
 
 @Component({
   components: {
     Layout,
-    DialogDetail
+    dialogAdd,
+    dialogDetail,
+    dialogReview,
+    dialogChange
   }
 })
 export default class Index extends Vue {
   public $refs!: {
-    dialogDetail: any
+    dialogAdd: any,
+    dialogDetail: any,
+    dialogReview: any,
+    dialogChange: any
   }
   selected: boolean = false
   singleSelected: boolean = false
@@ -180,13 +194,17 @@ export default class Index extends Vue {
     // console.log(this.$route.path)
   }
   add() {
-    this.$refs.dialogDetail.open(true)
+   this.$refs.dialogAdd.open()
   }
   edit() {
     this.$refs.dialogDetail.open(false)
   }
-  review(){}
-  changes(){}
+  review(){
+    this.$refs.dialogReview.open(true)
+  }
+  changes(){
+    this.$refs.dialogChange.open(true)
+  }
   remove() {
     this.$alert('您选了“启用”或“禁用”的数据，不能删除！', '错误提示', {
       confirmButtonText: '确定',

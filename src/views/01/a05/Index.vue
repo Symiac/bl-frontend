@@ -1,18 +1,14 @@
 <template>
-  <layout class="a05" :operation=false>
+  <layout class="a05">
     <template slot="search">
-      <el-form inline
-               :model="formSearch">
+      <el-form inline :model="formSearch">
         <div class="search-left">
-          
           <el-form-item style="margin-right:20px">
-             <el-select
-              v-model="formSearch.keyword"
+            <el-select
+              v-model="formSearch.order_unit"
               style="width:150px"
               placeholder="订货单位"
               clearable
-              multiple
-              collapse-tags
             >
               <el-option label="BL1901" value="01"></el-option>
               <el-option label="BL1902" value="02"></el-option>
@@ -21,133 +17,96 @@
           </el-form-item>
           <el-form-item>
             <el-select
-              v-model="formSearch.apply"
+              v-model="formSearch.working_number"
               style="width:150px"
               placeholder="产品工号"
               clearable
-              multiple
-              collapse-tags
             >
               <el-option label="BL1901" value="01"></el-option>
               <el-option label="BL1902" value="02"></el-option>
               <el-option label="（历史记录）" value="03"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item style="margin-right:20px">
-            <el-date-picker
-              v-model="time"
-              type="daterange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              class="data"
-            ></el-date-picker>
-          </el-form-item>
-          <!--
           <el-form-item>
-            <el-checkbox checked>未启用</el-checkbox>
-            <el-checkbox checked>启用</el-checkbox>
-            <el-checkbox checked>禁用</el-checkbox>
-          </el-form-item>-->
+            <el-date-picker v-model="formSearch.begin_time" type="date" placeholder="开始日期"></el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-date-picker v-model="formSearch.end_time" type="date" placeholder="结束日期"></el-date-picker>
+          </el-form-item>
         </div>
         <div class="search-right">
-          <el-button 
-                     @click="clear">清空</el-button>
-          <el-button 
-                     type="primary">查询</el-button>
+          <el-button @click="clear">清 空</el-button>
+          <el-button type="primary" icon="el-icon-search">查 询</el-button>
+          <el-button type="primary" icon="el-icon-download">
+            <a href="data:text/txt;charset=utf-8,导出下载" download="导出表格数据.xlsx">批量导出</a>
+          </el-button>
         </div>
-
       </el-form>
     </template>
+    <template slot="operation">
+      <div class="operation-left">
+        <div class="total">
+          <div class="total_title" style="background:#666666">工单总数</div>
+          <el-button class="total_btn" @click="clear">{{total.all_total}}</el-button>
+        </div>
+        <div class="total">
+          <div class="total_title" style="background:#FF0000">待提交</div>
+          <el-button class="total_btn" @click="clear">{{total.submit_total}}</el-button>
+        </div>
+        <div class="total">
+          <div class="total_title" style="background:#FF9900">待审批</div>
+          <el-button class="total_btn" @click="clear">{{total.audit_total}}</el-button>
+        </div>
+        <div class="total">
+          <div class="total_title" style="background:#FFCC00">待批准</div>
+          <el-button class="total_btn" @click="clear">{{total.approve_total}}</el-button>
+        </div>
+        <div class="total">
+          <div class="total_title" style="background:#3399CC">进行中</div>
+          <el-button class="total_btn" @click="clear">{{total.in_total}}</el-button>
+        </div>
+        <div class="total">
+          <div class="total_title" style="background:#33CC66">已完工</div>
+          <el-button class="total_btn" @click="clear">{{total.end_total}}</el-button>
+        </div>
+        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+          <el-button type="primary" @click="add">新增</el-button>
+        </div>
+        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+          <el-button type="primary" @click="edit">修改</el-button>
+        </div>
+        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+          <el-button type="primary" @click="review">审核</el-button>
+        </div>
+        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+          <el-button type="primary" @click="changes">变更</el-button>
+        </div>
+         <dialog-detail ref="dialogDetail"></dialog-detail>
+      </div>
+    </template>
     <template slot="content">
-      <el-table height="100%"
-                border
-                stripe
-                :data="tableData"
-                :default-sort="defaultSort"
-                row-key="id"
-                @selection-change="selectionChange">
-        <el-table-column type="selection"
-                         fixed
-                         width="40">
-        </el-table-column>
-        <el-table-column type="index"
-                         fixed
-                         label="序号"
-                         align="right"
-                         width="50">
-        </el-table-column>
-        <el-table-column prop="service" 
-                         fixed
-                         label="填单日期"
-                         sortable
-                         align="left"
-                         width="120">
-        </el-table-column>
-        <el-table-column prop="state"
-                         fixed
-                         label="通知单号"
-                         sortable
-                         align="center"
-                         width="120">
-        </el-table-column>
-        <el-table-column prop="creator"
-                         fixed
-                         label="订货单位"
-                         sortable
-                         align="center"
-                         width="120">
-        </el-table-column>
-        <el-table-column prop="createTime"
-                         fixed
-                         label="交货日期"
-                         sortable
-                         align="center"
-                         width="120">
-        </el-table-column>
-        <el-table-column prop="updatePerson"
-                         label="交货地点"
-                         sortable
-                         align="center"
-                         width="120">
-        </el-table-column>
-         <el-table-column prop="disablePerson"
-                         label="交货状态"
-                         sortable
-                         align="center"
-                         width="120">
-        </el-table-column>
-        <el-table-column prop="updateTime"
-                         label="运输方式"
-                         sortable
-                         align="center"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="enablePerson"
-                         label="产品工号"
-                         sortable
-                         align="center"
-                         width="120">
-        </el-table-column>
-        <el-table-column prop="enableTime"
-                         label="通知单状态"
-                         sortable
-                         align="center"
-                         min-width="120">
-        </el-table-column>
-       
-       
+      <el-table
+        height="100%"
+        border
+        stripe
+        :data="tableData"
+        :default-sort="defaultSort"
+        row-key="id"
+        @selection-change="selectionChange"
+      >
+        <el-table-column type="selection" fixed width="40"></el-table-column>
+        <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
+        <el-table-column prop="service" fixed label="填单日期" sortable align="left" width="120"></el-table-column>
+        <el-table-column prop="state" fixed label="通知单号" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="creator" fixed label="订货单位" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="createTime" fixed label="交货日期" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="updatePerson" label="交货地点" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="disablePerson" label="交货状态" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="updateTime" label="运输方式" sortable align="center" width="130"></el-table-column>
+        <el-table-column prop="enablePerson" label="产品工号" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="enableTime" label="通知单状态" sortable align="center" min-width="120"></el-table-column>
       </el-table>
-      <!-- <el-pagination @size-change="sizeChange"
-                     @current-change="currentChange"
-                     background
-                     :hide-on-single-page="true"
-                     :current-page="1"
-                     :page-sizes="[10, 20, 50, 100]"
-                     :page-size="20"
-                     layout="total, sizes, prev, pager, next, jumper"
-                     :total="5">
-      </el-pagination> -->
+  
     </template>
   </layout>
 </template>
@@ -158,24 +117,6 @@ import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
 import DialogDetail from './DialogDetail.vue'
 
-interface ISoftwareService {
-  id: string | number
-  service: string
-  state: string
-  remark: string
-  creator: string
-  createTime: string
-  updatePerson: string
-  updateTime: string
-  enablePerson: string
-  enableTime: string
-  disablePerson: string
-  disableTime: string
-}
-interface ISoftwareServiceSearch {
-  service: string
-  keyword: string
-}
 @Component({
   components: {
     Layout,
@@ -189,11 +130,22 @@ export default class Index extends Vue {
   selected: boolean = false
   singleSelected: boolean = false
   selection: any[] = []
-  formSearch: ISoftwareServiceSearch = {
-    service: '',
-    keyword: ''
+  total: any = {
+    all_total: '80',
+    submit_total: '5',
+    audit_total: '5',
+    approve_total: '15',
+    in_total: '30',
+    end_total: '15'
   }
-  tableData: any []= [
+  formSearch: any = {
+    begin_time: '', //查询开始日期
+    end_time: '', //查询结束日期
+    order_unit: '', //订货单位
+    working_number: '' //产品工号
+  }
+
+  tableData: any[] = [
     {
       id: 1,
       service: '2019-12-30',
@@ -204,7 +156,7 @@ export default class Index extends Vue {
       updateTime: '汽运',
       enablePerson: 'BL1901',
       enableTime: '未提交',
-      disablePerson: '成品',
+      disablePerson: '成品'
     },
     {
       id: 2,
@@ -216,7 +168,7 @@ export default class Index extends Vue {
       updateTime: '汽运',
       enablePerson: 'BL1901',
       enableTime: '待审批',
-      disablePerson: '成品',
+      disablePerson: '成品'
     }
   ]
   defaultSort: object = {
@@ -233,6 +185,8 @@ export default class Index extends Vue {
   edit() {
     this.$refs.dialogDetail.open(false)
   }
+  review(){}
+  changes(){}
   remove() {
     this.$alert('您选了“启用”或“禁用”的数据，不能删除！', '错误提示', {
       confirmButtonText: '确定',
@@ -313,22 +267,57 @@ export default class Index extends Vue {
   refresh() {}
   export() {}
   clear() {
-    this.formSearch.service = ''
-    this.formSearch.keyword = ''
+    this.formSearch.order_unit = ''
+    this.formSearch.working_number = ''
+    this.formSearch.begin_time = ''
+    this.formSearch.end_time = ''
   }
   selectionChange(selection: any) {
     this.selected = selection.length > 0
     this.singleSelected = selection.length === 1
     console.log(selection)
   }
-  sizeChange() {}
-  currentChange() {}
+
 }
 </script>
 
 <style lang="scss">
 .a05 {
-   .data {
+  .total {
+    height: 80;
+    float: left;
+    display: inline;
+    border: 1px solid #ccc;
+    margin-right: 30px;
+    .total_title {
+      width: 120px;
+      color: #fff;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .total_btn {
+      height: 50px;
+      width: 120px;
+      border-radius: 0;
+      border: none;
+      font-size: 28px;
+      &:hover {
+        color: #000;
+        background: #fff;
+      }
+      &:focus {
+        background: #e16003;
+        color: #fff;
+      }
+    }
+  }
+
+  .data {
     width: 70%;
     height: 30px;
     line-height: 30px;
@@ -337,7 +326,7 @@ export default class Index extends Vue {
       line-height: 22px;
     }
   }
-   .el-date-editor .el-range__icon {
+  .el-date-editor .el-range__icon {
     line-height: 25px;
   }
   .el-date-editor .el-range-separator {

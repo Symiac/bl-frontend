@@ -67,9 +67,9 @@ export default class DialogDetail extends Vue {
   ]
   open(isNew = true) {
     if (isNew) {
-      this.title = '新增采购模式'
+      this.title = '新增生产通知单'
     } else {
-      this.title = '修改采购模式'
+      this.title = '修改生产通知单'
     }
     this.visible = true
   }

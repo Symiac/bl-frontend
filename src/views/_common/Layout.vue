@@ -1,12 +1,13 @@
 <template>
   <div class="layout">
-    <div v-if="operation"
-         class="operation">
-      <slot name="operation"></slot>
-    </div>
+    
     <div v-if="search"
          class="search">
       <slot name="search"></slot>
+    </div>
+    <div v-if="operation"
+         class="operation">
+      <slot name="operation"></slot>
     </div>
     <div v-if="content"
          class="content">
@@ -47,7 +48,7 @@ export default class Layout extends Vue {
   flex: 1;
   .operation {
     width: 100%;
-    height: 30px;
+    min-height: 30px;
     box-sizing: border-box;
     margin-bottom: 10px;
     display: flex;

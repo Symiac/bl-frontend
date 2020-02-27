@@ -41,6 +41,15 @@ export default new Router({
           },
       
         },
+        {
+          path: '/bi',
+          name: 'biindex',
+          meta: {
+            title: '管理',
+            icon: '',
+          },
+          component: () => import('@/views/BI/index.vue')
+        },
       ]
     }
   ]

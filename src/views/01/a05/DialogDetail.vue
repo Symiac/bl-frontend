@@ -17,7 +17,17 @@
   -->
   <base-dialog ref="dialogDetail" type="table"  :title="title" :appendToBody="true" footer>
         <template slot="body">
-          
+           <el-form>
+        <el-row>
+          <el-form-item label="基础信息" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="产品信息" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="办理记录" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
+        </el-row>
+        </el-form>
         </template>
         <template slot="footer">
           <el-button type="primary" @click="save">提交</el-button>

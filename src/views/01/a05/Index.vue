@@ -27,7 +27,7 @@
               <el-option label="（历史记录）" value="03"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item>
+          <el-form-item label="填单日期:" label-width="150">
             <el-date-picker v-model="formSearch.begin_time" type="date" placeholder="开始日期"></el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -100,15 +100,15 @@
       >
         <el-table-column type="selection" fixed width="40"></el-table-column>
         <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-        <el-table-column prop="service" fixed label="填单日期" sortable align="left" width="120"></el-table-column>
-        <el-table-column prop="state" fixed label="通知单号" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="creator" fixed label="订货单位" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="createTime" fixed label="交货日期" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="updatePerson" label="交货地点" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="disablePerson" label="交货状态" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="updateTime" label="运输方式" sortable align="center" width="130"></el-table-column>
-        <el-table-column prop="enablePerson" label="产品工号" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="enableTime" label="通知单状态" sortable align="center" min-width="120"></el-table-column>
+        <el-table-column prop="fill_in_date" fixed label="填单日期" sortable align="left" width="120"></el-table-column>
+        <el-table-column prop="notice_number" fixed label="通知单号" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="order_unit" fixed label="订货单位" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="delivery_date" fixed label="交货日期" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="delivery_place" label="交货地点" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="delivery_state" label="交货状态" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="shipping_type" label="运输方式" sortable align="center" width="130"></el-table-column>
+        <el-table-column prop="working_number" label="产品工号" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="state" label="通知单状态" sortable align="center" min-width="120"></el-table-column>
       </el-table>
   
     </template>
@@ -161,28 +161,28 @@ export default class Index extends Vue {
 
   tableData: any[] = [
     {
-      id: 1,
-      service: '2019-12-30',
-      state: '19-034',
-      creator: '东亚利根',
-      createTime: '2020-03-11',
-      updatePerson: '大窑湾港',
-      updateTime: '汽运',
-      enablePerson: 'BL1901',
-      enableTime: '未提交',
-      disablePerson: '成品'
+  
+      fill_in_date: '2019-12-30',
+      notice_number: '19-034',
+      order_unit: '东亚利根',
+      delivery_date: '2020-03-11',
+      delivery_place: '大窑湾港',
+      shipping_type: '汽运',
+      working_number: 'BL1901',
+      state: '未提交',
+      delivery_state: '成品'
     },
     {
-      id: 2,
-      service: '2019-12-30',
-      state: '19-034',
-      creator: '东亚利根',
-      createTime: '分批交货',
-      updatePerson: '大窑湾港',
-      updateTime: '汽运',
-      enablePerson: 'BL1901',
-      enableTime: '待审批',
-      disablePerson: '成品'
+    
+      fill_in_date: '2019-12-30',
+      notice_number: '19-035',
+      order_unit: '东亚利根',
+      delivery_date: '2020-03-11',
+      delivery_place: '大窑湾港',
+      shipping_type: '汽运',
+      working_number: 'BL1903',
+      state: '待审核',
+      delivery_state: '成品'
     }
   ]
   defaultSort: object = {

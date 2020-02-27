@@ -122,7 +122,7 @@ import Layout from '@/views/_common/Layout.vue'
 import dialogAdd from './Dialog.vue'
 import dialogDetail from './DialogDetail.vue'
 import dialogReview from './DialogReview.vue'
-import dialogChange from './DialogChange.vue'
+
 
 
 @Component({
@@ -131,7 +131,7 @@ import dialogChange from './DialogChange.vue'
     dialogAdd,
     dialogDetail,
     dialogReview,
-    dialogChange
+
   }
 })
 export default class Index extends Vue {
@@ -139,7 +139,7 @@ export default class Index extends Vue {
     dialogAdd: any,
     dialogDetail: any,
     dialogReview: any,
-    dialogChange: any
+
   }
   selected: boolean = false
   singleSelected: boolean = false
@@ -203,7 +203,7 @@ export default class Index extends Vue {
     this.$refs.dialogReview.open(true)
   }
   changes(){
-    this.$refs.dialogChange.open(true)
+    this.$refs.dialogDetail.change()
   }
   remove() {
     this.$alert('您选了“启用”或“禁用”的数据，不能删除！', '错误提示', {

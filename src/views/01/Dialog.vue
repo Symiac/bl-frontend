@@ -5,7 +5,7 @@
     :close-on-click-modal="false"
     :title="title"
     :visible.sync="visible"
-     append-to-body
+    append-to-body
   >
     <el-form :model="form" :rules="rules" ref="form" label-width="100px">
       <el-form-item label="订货单位" prop="order_unit">
@@ -36,9 +36,8 @@
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="submitForm">下一步</el-button>
       <el-button @click="close">取消</el-button>
-       <dialog-1 ref="dialog1"></dialog-1>
+      <dialog-1 ref="dialog1"></dialog-1>
     </div>
-   
   </el-dialog>
 </template>
 
@@ -53,7 +52,7 @@ import Dialog1 from './DialogDetail.vue'
 })
 export default class DialogDetail extends Vue {
   public $refs!: {
-    form: any,
+    form: any
     dialog1: any
   }
 
@@ -76,7 +75,7 @@ export default class DialogDetail extends Vue {
     { id: 5, value: '场地授权' },
     { id: 6, value: '节点授权' }
   ]
-  open() { 
+  open() {
     this.visible = true
   }
   close() {
@@ -90,8 +89,8 @@ export default class DialogDetail extends Vue {
         this.visible = false
       }
     })
-    if(!this.visible){
-    this.$refs.dialog1.open(true)
+    if (!this.visible) {
+      this.$refs.dialog1.open(true)
     }
   }
   querySearch(queryString, cb) {
@@ -107,3 +106,6 @@ export default class DialogDetail extends Vue {
   handleSelect() {}
 }
 </script>
+
+<style lang="scss">
+</style>

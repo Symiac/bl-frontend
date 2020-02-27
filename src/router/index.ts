@@ -30,7 +30,7 @@ export default new Router({
             title: '生产通知管理',
             icon: '',
           },
-          component: () => import('@/views/01/a05/Index.vue')
+          component: () => import('@/views/01/Index.vue')
         },
         {
           path: '/02',

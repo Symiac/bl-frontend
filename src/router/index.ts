@@ -39,7 +39,7 @@ export default new Router({
             title: '工艺工时设计',
             icon: '',
           },
-      
+          component: () => import('@/views/02/Index.vue')
         },
         {
           path: '/bi',

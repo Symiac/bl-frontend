@@ -51,7 +51,7 @@
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="save">确定</el-button>
       <el-button @click="close">取消</el-button>
-      <dialog-1 ref="dialog1"></dialog-1>
+
     </div>
   </el-dialog>
 </template>
@@ -59,16 +59,16 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
-import Dialog1 from './DialogDetail.vue'
+
 @Component({
   components: {
-    Dialog1
+
   }
 })
 export default class DialogDetail extends Vue {
   public $refs!: {
     form: any
-    dialog1: any
+
   }
 
   visible: boolean = false

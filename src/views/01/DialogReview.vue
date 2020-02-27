@@ -2,7 +2,7 @@
   <div class="dialog-review">
     <el-dialog width="900px" :close-on-click-modal="false" :title="title" :visible.sync="visible">
       <el-tabs v-model="first">
-        <el-tab-pane label="通知单详情" name="first">
+        <el-tab-pane label="通知单详情" name="first" class="information">
           <el-form>
             <el-row>
               <el-form-item label="基础信息" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
@@ -283,8 +283,10 @@ export default class DialogDetail extends Vue {
         flex: 1;
         // height: 450px;
         overflow: auto;
+        .information{
         .el-form-item {
           margin-bottom: 10px;
+        }
         }
         .el-input__inner {
           background-color: #fff;

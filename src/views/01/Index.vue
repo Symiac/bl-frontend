@@ -84,7 +84,6 @@
         <dialog-add ref="dialogAdd"></dialog-add>
          <dialog-detail ref="dialogDetail"></dialog-detail>
          <dialog-review ref="dialogReview"></dialog-review>
-         <dialog-change ref="dialogChange"></dialog-change>
          
       </div>
     </template>

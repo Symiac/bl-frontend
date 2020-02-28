@@ -54,7 +54,7 @@
           <el-button class="total_btn" @click="clear">{{total.submit_total}}</el-button>
         </div>
         <div class="total">
-          <div class="total_title" style="background:#FF9900">待审批</div>
+          <div class="total_title" style="background:#FF9900">待审核</div>
           <el-button class="total_btn" @click="clear">{{total.audit_total}}</el-button>
         </div>
         <div class="total">

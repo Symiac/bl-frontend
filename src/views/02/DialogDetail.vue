@@ -21,36 +21,17 @@
           </el-col>
           <el-col :span="7">
             <el-form-item label="产品名称" label-width="120px" prop="type">
-              <el-select
-                v-model="basics.order_unit"
-                style="width:150px"
-                placeholder="BL1901"
-                clearable
-              >
-                <el-option label="BL1901" value="01"></el-option>
-                <el-option label="BL1902" value="02"></el-option>
-                <el-option label="（历史记录）" value="03"></el-option>
-              </el-select>
+                          <el-input v-model="basics.order_unit" style="width:120px" disabled></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="数量" label-width="120px" prop="area">
-              <el-select
-                v-model="basics.order_unit"
-                style="width:150px"
-                placeholder="产品工号"
-                clearable
-              >
-                <el-option label="BL1901" value="01"></el-option>
-                <el-option label="BL1902" value="02"></el-option>
-                <el-option label="（历史记录）" value="03"></el-option>
-              </el-select>
+                          <el-input v-model="basics.num" style="width:120px" placeholder="产品工号" disabled></el-input>
             </el-form-item>
           </el-col>
         </el-row>
 
           <el-table height="100%" style="margin-top:10px" border stripe :data="product" row-key="id">
-            <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
             <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="120"></el-table-column>
             <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120"></el-table-column>
@@ -90,8 +71,10 @@ export default class DialogDetail extends Vue {
   formDetail: any = {
     con: ''
   }
-  basics: any = {
-    radio: '1'
+   basics: any = {
+    name: 'D1118-02',
+    order_unit: 'NP-700齿轮',
+    num: '5'
   }
   product: any[] = [
     {
@@ -177,9 +160,6 @@ export default class DialogDetail extends Vue {
       overflow: auto;
       .information{
         margin-top: 20px;
-      .el-form-item {
-        margin-bottom: 10px;
-      }
       }
       .el-input__inner {
         background-color: #fff;

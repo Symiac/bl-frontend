@@ -361,6 +361,11 @@
       </layout>
     </el-tab-pane>
     <dialog-detail ref="dialog"></dialog-detail>
+    <first-review ref="first"></first-review>
+    <third-review ref="third"></third-review>
+    <four-add ref="four"></four-add>
+    <five-review ref="five"></five-review>
+    <six-add ref="six"></six-add>
   </el-tabs>
 </template>
 
@@ -369,16 +374,31 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
 import DialogDetail from './DialogDetail.vue'
+import FirstReview from './firstReview.vue'
+import ThirdReview from './thirdReview.vue'
+import FourAdd from './fourAdd.vue'
+import FiveReview from './fiveReview.vue'
+import SixAdd from './sixAdd.vue'
 
 @Component({
   components: {
     Layout,
-    DialogDetail
+    DialogDetail,
+    FirstReview,
+    ThirdReview,
+    FourAdd,
+    FiveReview,
+    SixAdd
   }
 })
 export default class Index extends Vue {
   public $refs!: {
-    dialog: any
+    dialog: any,
+    first: any,
+    third: any,
+    four:any,
+    five: any,
+    six: any
   }
   selected: boolean = false
   singleSelected: boolean = false
@@ -474,11 +494,21 @@ export default class Index extends Vue {
   rowDoubleClick() {
     this.$refs.dialog.open(true)
   }
-  firstReview() {}
-  thirdReview() {}
-  fourAdd() {}
-  fiveReview() {}
-  sixAdd() {}
+  firstReview() {
+    this.$refs.first.open(true)
+  }
+  thirdReview() {
+    this.$refs.third.open(true)
+  }
+  fourAdd() {
+    this.$refs.four.open(true)
+  }
+  fiveReview() {
+    this.$refs.five.open(true)
+  }
+  sixAdd() {
+    this.$refs.six.open(true)
+  }
 
   sum() {
     const sumdata = {

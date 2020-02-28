@@ -8,20 +8,7 @@
   >
     <el-form class="information">
       <el-row>
-        <el-col :span="7">
-          <el-form-item label="工艺版本" label-width="120px" prop="area">
-            <el-select
-              v-model="basics.order_unit"
-              style="width:150px"
-              placeholder="输入工艺版本号"
-              clearable
-            >
-              <el-option label="BL1901" value="01"></el-option>
-              <el-option label="BL1902" value="02"></el-option>
-              <el-option label="（历史记录）" value="03"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
+        
         <el-col :span="7">
           <el-form-item label="图号" label-width="120px" prop="name">
             <el-input
@@ -46,7 +33,20 @@
             </el-select>
           </el-form-item>
         </el-col>
-        
+        <el-col :span="7">
+          <el-form-item label="数量" label-width="120px" prop="area">
+            <el-select
+              v-model="basics.order_unit"
+              style="width:150px"
+              placeholder="数量"
+              clearable
+            >
+              <el-option label="BL1901" value="01"></el-option>
+              <el-option label="BL1902" value="02"></el-option>
+              <el-option label="（历史记录）" value="03"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
       </el-row>
 <el-row>
           <el-button-group>
@@ -135,7 +135,7 @@ export default class DialogDetail extends Vue {
     form: any
   }
   theight: string = ''
-  title: string = '新增工艺版本'
+  title: string = '新增工装产品'
   visible: boolean = false
   formDetail: any = {
     con: ''
@@ -189,7 +189,7 @@ export default class DialogDetail extends Vue {
 
   open(isNew = true) {
     if (isNew) {
-      this.title = '新增工艺版本'
+      this.title = '新增工装产品'
     } else {
       this.title = ''
     }

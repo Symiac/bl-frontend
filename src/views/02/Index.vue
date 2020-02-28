@@ -344,7 +344,7 @@
         </template>
         <template slot="operation">
           <div class="operation-left">
-            <el-button type="primary" icon="el-icon-plus" @click="sixAdd">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-plus" @click="sixAdd">添加工艺版本</el-button>
             <el-button type="primary" icon="el-icon-delete">删除</el-button>
           </div>
         </template>

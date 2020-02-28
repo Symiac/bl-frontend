@@ -30,15 +30,29 @@
             </el-form-item>
           </el-col>
         </el-row>
-
+        <el-row>
+          
+            <el-button type="primary" icon="el-icon-plus" @click="thirdadd">添加工艺表</el-button>
+            <el-button type="primary" icon="el-icon-delete">删除工艺表</el-button>
+        
+        
+        </el-row>
           <el-table height="100%" style="margin-top:10px" border stripe :data="product" row-key="id">
+            <el-table-column>
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
+            </el-table-column>
+            <el-table-column label="工艺表一"  align="center" >
             <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="120"></el-table-column>
             <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120"></el-table-column>
             <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120"></el-table-column>
+            </el-table-column>
+              <el-table-column label="数量" align="center" >
             <el-table-column prop="delivery_date" label="定额工时" align="center" width="120"></el-table-column>
+              </el-table-column>
+              <el-table-column>
             <el-table-column prop="delivery_place" label="调试工时" align="center" width="120"></el-table-column>
             <el-table-column prop="state" label="备注" align="center" min-width="120"></el-table-column>
+              </el-table-column>
           </el-table>
       </el-form>
 
@@ -116,23 +130,18 @@ export default class DialogDetail extends Vue {
       handle_by: ''
     },
   ]
+  thirdadd(){}
 
   open(isNew = true) {
     if (isNew) {
-      this.title = '查看设计详情'
+      this.title = '返修处理'
     } else {
-      this.title = '设计详情'
+      this.title = ''
     }
     this.visible = true
   }
-  change(){
-    this.title = '更改生产通知单'
-    this.visible = true
-  }
+ 
 
-  addProduct(){
-       this.$refs.addProduct.open()
-  }
   save() {
     this.visible = false
     this.$alert('保存成功！', '操作成功', {

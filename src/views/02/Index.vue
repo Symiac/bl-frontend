@@ -1,7 +1,7 @@
 <template>
-  <el-tabs  value="first" style="width:auto; padding:0 20px; margin-top:0px;">
-    <el-tab-pane  label="首页" name="first">
-      <layout :operation="false" style="padding:0 0;">
+  <el-tabs value="first" style="width:auto; padding:0 20px; margin-top:0px;">
+    <el-tab-pane label="首页" name="first">
+      <layout style="padding:0 0;">
         <template slot="search">
           <el-form inline :model="formSearch">
             <div class="search-left">
@@ -33,12 +33,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-select
-                  v-model="formSearch.c"
-                  style="width:150px"
-                  placeholder="状态"
-                  clearable
-                >
+                <el-select v-model="formSearch.c" style="width:150px" placeholder="状态" clearable>
                   <el-option label="管理工作类" value="01"></el-option>
                   <el-option label="业务学习类" value="02"></el-option>
                   <el-option label="操作说明类" value="03"></el-option>
@@ -46,12 +41,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-select
-                  v-model="formSearch.b"
-                  style="width:150px"
-                  placeholder="类型"
-                  clearable
-                >
+                <el-select v-model="formSearch.b" style="width:150px" placeholder="类型" clearable>
                   <el-option label="管理工作类" value="01"></el-option>
                   <el-option label="业务学习类" value="02"></el-option>
                   <el-option label="操作说明类" value="03"></el-option>
@@ -59,20 +49,13 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-select
-                  v-model="formSearch.a"
-                  style="width:150px"
-                  placeholder="通知单号"
-                  clearable
-                >
+                <el-select v-model="formSearch.a" style="width:150px" placeholder="通知单号" clearable>
                   <el-option label="管理工作类" value="01"></el-option>
                   <el-option label="业务学习类" value="02"></el-option>
                   <el-option label="操作说明类" value="03"></el-option>
                   <el-option label="内训讲师类" value="05"></el-option>
                 </el-select>
               </el-form-item>
-
-              
             </div>
             <div class="search-right">
               <el-button @click="clear">清空</el-button>
@@ -83,8 +66,20 @@
             </div>
           </el-form>
         </template>
+        <template slot="operation">
+          <el-button-group>
+            <el-button type="primary" icon="el-icon-edit" @click="firstReview">审 核</el-button>
+          </el-button-group>
+        </template>
         <template slot="content">
-         <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table
+            height="100%"
+            border
+            stripe
+            :data="tableData"
+            row-key="id"
+            @row-dblclick="rowDoubleClick"
+          >
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
@@ -94,18 +89,16 @@
             <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
             <el-table-column prop="d" label="通知单号" align="center" width="100"></el-table-column>
             <el-table-column prop="p" label="产品工号" align="center" width="100"></el-table-column>
-            <el-table-column prop="t" label="类型"  align="center" width="100"></el-table-column>
-            <el-table-column prop="state" label="状态"  align="center" width="100"></el-table-column>
+            <el-table-column prop="t" label="类型" align="center" width="100"></el-table-column>
+            <el-table-column prop="state" label="状态" align="center" width="100"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
           </el-table>
         </template>
       </layout>
     </el-tab-pane>
-    <el-tab-pane label="产品通知" name="second">
-       
-    </el-tab-pane>
+    <el-tab-pane label="产品通知" name="second"></el-tab-pane>
     <el-tab-pane label="返修处理" name="third">
-       <layout :operation="false" style="padding:0 0;">
+      <layout style="padding:0 0;">
         <template slot="search">
           <el-form inline :model="formSearch">
             <div class="search-left">
@@ -113,7 +106,7 @@
                 <el-select
                   v-model="formSearch.apply_company"
                   style="width:150px"
-                  placeholder="单位/机构"
+                  placeholder="输入图号"
                   clearable
                 >
                   <el-option label="中国铁建" value="01"></el-option>
@@ -125,9 +118,9 @@
               </el-form-item>
               <el-form-item>
                 <el-select
-                  v-model="formSearch.apply"
+                  v-model="formSearch.add"
                   style="width:150px"
-                  placeholder="类别"
+                  placeholder="失误工序"
                   clearable
                 >
                   <el-option label="管理工作类" value="01"></el-option>
@@ -136,48 +129,47 @@
                   <el-option label="内训讲师类" value="05"></el-option>
                 </el-select>
               </el-form-item>
-
               <el-form-item>
-                <el-date-picker
-                  v-model="value1"
-                  type="daterange"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  class="data"
-                  prefix-icon="date-icon"
-                ></el-date-picker>
+                <el-select v-model="formSearch.c" style="width:150px" placeholder="状态" clearable>
+                  <el-option label="管理工作类" value="01"></el-option>
+                  <el-option label="业务学习类" value="02"></el-option>
+                  <el-option label="操作说明类" value="03"></el-option>
+                  <el-option label="内训讲师类" value="05"></el-option>
+                </el-select>
               </el-form-item>
             </div>
             <div class="search-right">
               <el-button @click="clear">清空</el-button>
-              <el-button type="primary">统计</el-button>
+              <el-button type="primary">查询</el-button>
               <el-button type="primary">
                 <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
               </el-button>
             </div>
           </el-form>
         </template>
+        <template slot="operation">
+          <el-button-group>
+            <el-button type="primary" icon="el-icon-edit" @click="thirdReview">设计处理</el-button>
+          </el-button-group>
+        </template>
         <template slot="content">
-         <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
-            <el-table-column prop="d" label="通知单号" align="center" width="100"></el-table-column>
-            <el-table-column prop="p" label="产品工号" align="center" width="100"></el-table-column>
-            <el-table-column prop="t" label="类型"  align="center" width="100"></el-table-column>
-            <el-table-column prop="state" label="状态"  align="center" width="100"></el-table-column>
-            <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
+            <el-table-column prop="d" label="失误工序" fixed align="center" width="120"></el-table-column>
+            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="120"></el-table-column>
+            <el-table-column prop="notice_number" fixed label="品名" align="center" width="120"></el-table-column>
+            <el-table-column prop="order_unit" fixed label="材质" align="center" width="120"></el-table-column>
+            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="120"></el-table-column>
+            <el-table-column prop="t" label="类型" align="center" width="120"></el-table-column>
+            <el-table-column prop="state" label="状态" align="center" width="120"></el-table-column>
+            <el-table-column prop="remark" label="备注" align="center" min-width="120"></el-table-column>
           </el-table>
         </template>
       </layout>
     </el-tab-pane>
     <el-tab-pane label="工装产品" name="four">
-         <layout :operation="false" style="padding:0 0;">
+      <layout style="padding:0 0;">
         <template slot="search">
           <el-form inline :model="formSearch">
             <div class="search-left">
@@ -185,7 +177,7 @@
                 <el-select
                   v-model="formSearch.apply_company"
                   style="width:150px"
-                  placeholder="单位/机构"
+                  placeholder="输入图号"
                   clearable
                 >
                   <el-option label="中国铁建" value="01"></el-option>
@@ -197,9 +189,9 @@
               </el-form-item>
               <el-form-item>
                 <el-select
-                  v-model="formSearch.apply"
+                  v-model="formSearch.add"
                   style="width:150px"
-                  placeholder="类别"
+                  placeholder="输入品名"
                   clearable
                 >
                   <el-option label="管理工作类" value="01"></el-option>
@@ -208,48 +200,37 @@
                   <el-option label="内训讲师类" value="05"></el-option>
                 </el-select>
               </el-form-item>
-
-              <el-form-item>
-                <el-date-picker
-                  v-model="value1"
-                  type="daterange"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  class="data"
-                  prefix-icon="date-icon"
-                ></el-date-picker>
-              </el-form-item>
             </div>
             <div class="search-right">
               <el-button @click="clear">清空</el-button>
-              <el-button type="primary">统计</el-button>
+              <el-button type="primary">查询</el-button>
               <el-button type="primary">
                 <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
               </el-button>
             </div>
           </el-form>
         </template>
+        <template slot="operation">
+          <div class="operation-left">
+            <el-button type="primary" icon="el-icon-plus" @click="fourAdd">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-delete">删除</el-button>
+          </div>
+        </template>
         <template slot="content">
-         <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
-            <el-table-column prop="d" label="通知单号" align="center" width="100"></el-table-column>
-            <el-table-column prop="p" label="产品工号" align="center" width="100"></el-table-column>
-            <el-table-column prop="t" label="类型"  align="center" width="100"></el-table-column>
-            <el-table-column prop="state" label="状态"  align="center" width="100"></el-table-column>
-            <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
+            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="120"></el-table-column>
+            <el-table-column prop="notice_number" fixed label="品名" align="center" width="120"></el-table-column>
+            <el-table-column prop="order_unit" fixed label="下单人" align="center" width="120"></el-table-column>
+            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="120"></el-table-column>
+            <el-table-column prop="remark" label="备注" align="center" min-width="120"></el-table-column>
           </el-table>
         </template>
       </layout>
     </el-tab-pane>
     <el-tab-pane label="技术评审" name="five">
-         <layout :operation="false" style="padding:0 0;">
+      <layout style="padding:0 0;">
         <template slot="search">
           <el-form inline :model="formSearch">
             <div class="search-left">
@@ -257,7 +238,7 @@
                 <el-select
                   v-model="formSearch.apply_company"
                   style="width:150px"
-                  placeholder="单位/机构"
+                  placeholder="输入图号"
                   clearable
                 >
                   <el-option label="中国铁建" value="01"></el-option>
@@ -269,9 +250,9 @@
               </el-form-item>
               <el-form-item>
                 <el-select
-                  v-model="formSearch.apply"
+                  v-model="formSearch.add"
                   style="width:150px"
-                  placeholder="类别"
+                  placeholder="评审工序"
                   clearable
                 >
                   <el-option label="管理工作类" value="01"></el-option>
@@ -280,48 +261,47 @@
                   <el-option label="内训讲师类" value="05"></el-option>
                 </el-select>
               </el-form-item>
-
               <el-form-item>
-                <el-date-picker
-                  v-model="value1"
-                  type="daterange"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  class="data"
-                  prefix-icon="date-icon"
-                ></el-date-picker>
+                <el-select v-model="formSearch.c" style="width:150px" placeholder="状态" clearable>
+                  <el-option label="管理工作类" value="01"></el-option>
+                  <el-option label="业务学习类" value="02"></el-option>
+                  <el-option label="操作说明类" value="03"></el-option>
+                  <el-option label="内训讲师类" value="05"></el-option>
+                </el-select>
               </el-form-item>
             </div>
             <div class="search-right">
               <el-button @click="clear">清空</el-button>
-              <el-button type="primary">统计</el-button>
+              <el-button type="primary">查询</el-button>
               <el-button type="primary">
                 <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
               </el-button>
             </div>
           </el-form>
         </template>
+        <template slot="operation">
+          <el-button-group>
+            <el-button type="primary" icon="el-icon-edit" @click="fiveReview">评 审</el-button>
+          </el-button-group>
+        </template>
         <template slot="content">
-         <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
+            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="120"></el-table-column>
+            <el-table-column prop="notice_number" fixed label="品名" align="center" width="120"></el-table-column>
             <el-table-column prop="delivery_date" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
-            <el-table-column prop="d" label="通知单号" align="center" width="100"></el-table-column>
-            <el-table-column prop="p" label="产品工号" align="center" width="100"></el-table-column>
-            <el-table-column prop="t" label="类型"  align="center" width="100"></el-table-column>
-            <el-table-column prop="state" label="状态"  align="center" width="100"></el-table-column>
-            <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
+            <el-table-column prop="d" label="通知单号" align="center" width="120"></el-table-column>
+            <el-table-column prop="p" label="产品工号" align="center" width="120"></el-table-column>
+            <el-table-column prop="delivery_place" label="评审工序" align="center" width="120"></el-table-column>
+            <el-table-column prop="t" label="发起人" align="center" width="120"></el-table-column>
+            <el-table-column prop="state" label="状态" align="center" min-width="120"></el-table-column>
           </el-table>
         </template>
       </layout>
     </el-tab-pane>
     <el-tab-pane label="产品工艺库" name="six">
-         <layout :operation="false" style="padding:0 0;">
+      <layout style="padding:0 0;">
         <template slot="search">
           <el-form inline :model="formSearch">
             <div class="search-left">
@@ -329,7 +309,7 @@
                 <el-select
                   v-model="formSearch.apply_company"
                   style="width:150px"
-                  placeholder="单位/机构"
+                  placeholder="输入图号"
                   clearable
                 >
                   <el-option label="中国铁建" value="01"></el-option>
@@ -341,9 +321,9 @@
               </el-form-item>
               <el-form-item>
                 <el-select
-                  v-model="formSearch.apply"
+                  v-model="formSearch.add"
                   style="width:150px"
-                  placeholder="类别"
+                  placeholder="版本编号"
                   clearable
                 >
                   <el-option label="管理工作类" value="01"></el-option>
@@ -352,70 +332,48 @@
                   <el-option label="内训讲师类" value="05"></el-option>
                 </el-select>
               </el-form-item>
-
-              <el-form-item>
-                <el-date-picker
-                  v-model="value1"
-                  type="daterange"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  class="data"
-                  prefix-icon="date-icon"
-                ></el-date-picker>
-              </el-form-item>
             </div>
             <div class="search-right">
               <el-button @click="clear">清空</el-button>
-              <el-button type="primary">统计</el-button>
+              <el-button type="primary">查询</el-button>
               <el-button type="primary">
                 <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
               </el-button>
             </div>
           </el-form>
         </template>
+        <template slot="operation">
+          <div class="operation-left">
+            <el-button type="primary" icon="el-icon-plus" @click="sixAdd">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-delete">删除</el-button>
+          </div>
+        </template>
         <template slot="content">
-         <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
-            <el-table-column prop="d" label="通知单号" align="center" width="100"></el-table-column>
-            <el-table-column prop="p" label="产品工号" align="center" width="100"></el-table-column>
-            <el-table-column prop="t" label="类型"  align="center" width="100"></el-table-column>
-            <el-table-column prop="state" label="状态"  align="center" width="100"></el-table-column>
+            <el-table-column prop="order_unit" fixed label="版本编号" align="center" width="150"></el-table-column>
+            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="150"></el-table-column>
+            <el-table-column prop="delivery_place" label="品名" align="center" width="150"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
           </el-table>
         </template>
       </layout>
     </el-tab-pane>
+    <dialog-detail ref="dialog"></dialog-detail>
   </el-tabs>
- 
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
-
-interface ISoftwareAuthorization {
-  post: string
-  type: string
-  shouldNum: number
-  alreadyNum: number
-  notNum: number
-}
-interface ISoftwareAuthorizationSearch {
-  post: string
-  data: string
-}
+import DialogDetail from './DialogDetail.vue'
 
 @Component({
   components: {
-    Layout
+    Layout,
+    DialogDetail
   }
 })
 export default class Index extends Vue {
@@ -426,16 +384,14 @@ export default class Index extends Vue {
   singleSelected: boolean = false
   selection: any[] = []
   value1: string = ''
-  formSearch: ISoftwareAuthorizationSearch = {
+  formSearch: any = {
     post: '',
-    data: '',
+    data: ''
     // keyword:''
   }
 
   tableData: any[] = [
-    {
-      
-    },
+    {},
     {
       post: '中国铁建',
       type: '管理办法类',
@@ -515,6 +471,14 @@ export default class Index extends Vue {
   edit() {
     this.$refs.dialog.open(false)
   }
+  rowDoubleClick() {
+    this.$refs.dialog.open(true)
+  }
+  firstReview() {}
+  thirdReview() {}
+  fourAdd() {}
+  fiveReview() {}
+  sixAdd() {}
 
   sum() {
     const sumdata = {

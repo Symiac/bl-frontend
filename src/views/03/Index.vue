@@ -223,6 +223,7 @@ basic:any[]=[{
     this.s2 = 's'
   }
   addRow() {}
+  DoubleClick2(){}
 }
 </script>
 

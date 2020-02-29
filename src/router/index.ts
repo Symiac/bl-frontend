@@ -42,6 +42,15 @@ export default new Router({
           component: () => import('@/views/02/Index.vue')
         },
         {
+          path: '/03',
+          name: '03',
+          meta: {
+            title: '生产派工管理',
+            icon: '',
+          },
+          component: () => import('@/views/03/Index.vue')
+        },
+        {
           path: '/bi',
           name: 'biindex',
           meta: {

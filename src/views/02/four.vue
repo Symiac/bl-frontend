@@ -63,12 +63,12 @@
         :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       >
         <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-        <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="120">
+        <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
           <template slot-scope="scope">
             <el-input v-model="scope.row.fill_in_date"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120">
+        <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="110">
           <template slot-scope="scope">
             <el-select v-model="scope.row.notice_number" @change="onSelectChange">
               <el-option
@@ -80,16 +80,16 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
+        <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="110">
         <template slot-scope="scope">
             <el-input v-model="scope.row.order_unit"></el-input>
           </template></el-table-column>
-        <el-table-column prop="delivery_date" label="定额工时" align="center" width="120">
+        <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
           <template slot-scope="scope">
             <el-input v-model="scope.row.delivery_date"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="delivery_place" label="调试工时" align="center" width="120">
+        <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
           <template slot-scope="scope">
             <el-input v-model="scope.row.delivery_place"></el-input>
           </template>
@@ -102,8 +102,15 @@
         <el-table-column
       label="操作"
       align="center"
-      width="80">
+      width="110">
       <template slot-scope="scope">
+         <el-tooltip content="添加设备" placement="top-start" effect="light">
+            <el-button
+              type="text"
+              icon="el-icon-plus"
+              size="small"
+            ></el-button>
+             </el-tooltip>
         <el-button
           @click.native.prevent="deleteRow(scope.$index, product)"
           type="text"

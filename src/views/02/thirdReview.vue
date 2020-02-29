@@ -1,65 +1,220 @@
 <template>
-    <el-dialog
-      width="900px"
-      :close-on-click-modal="false"
-      :title="title"
-      :visible.sync="visible"
-      append-to-body
-    >
-      <el-form class="information">
-      
-        <el-row>
-          <el-col :span="7">
-            <el-form-item label="图号" label-width="120px" prop="name">
-              <el-input
-                class="inline-input"
-                style="width:100%"
-                v-model="basics.name"
-                placeholder="自动填充"
-              ></el-input>
+  <el-dialog
+    width="900px"
+    :close-on-click-modal="false"
+    :title="title"
+    :visible.sync="visible"
+    append-to-body
+  >
+    <el-form class="information">
+      <el-row>
+        <el-col :span="7">
+          <el-form-item label="图号" label-width="120px" prop="name">
+            <el-input
+              class="inline-input"
+              style="width:100%"
+              v-model="basics.name"
+              placeholder="自动填充"
+            ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="7">
+          <el-form-item label="产品名称" label-width="120px" prop="type">
+            <el-input v-model="basics.order_unit" style="width:120px" disabled></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="7">
+          <el-form-item label="数量" label-width="120px" prop="area">
+            <el-input v-model="basics.num" style="width:120px" placeholder="产品工号" disabled></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row style="margin-bottom: 22px">
+        <el-button type="primary" icon="el-icon-plus" @click="Add">添加工艺表</el-button>
+      </el-row>
+      <div class="tab">
+        <div class="t1">
+          <el-row>
+            <el-form-item
+              label="工艺表一"
+              v-model="basics.nnn"
+              style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px"
+            >
+              <el-button-group>
+                <el-button type="text" icon="el-icon-plus" @click="thirdadd">新增</el-button>
+                <el-tooltip content="删除此工艺表" placement="top-start" effect="light">
+                  <el-button type="text" icon="el-icon-delete" @click="thirddelete" disabled>删除</el-button>
+                </el-tooltip>
+              </el-button-group>
+              <el-input-number
+                v-model="basics.n"
+                placeholder="数量"
+                size="small"
+                style="width:150px"
+                :min="0"
+                :max="5"
+              ></el-input-number>
             </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item label="产品名称" label-width="120px" prop="type">
-                          <el-input v-model="basics.order_unit" style="width:120px" disabled></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item label="数量" label-width="120px" prop="area">
-                          <el-input v-model="basics.num" style="width:120px" placeholder="产品工号" disabled></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          
-            <el-button type="primary" icon="el-icon-plus" @click="thirdadd">添加工艺表</el-button>
-            <el-button type="primary" icon="el-icon-delete">删除工艺表</el-button>
-        
-        
-        </el-row>
-          <el-table height="100%" style="margin-top:10px" border stripe :data="product" row-key="id">
-            <el-table-column>
+          </el-row>
+          <el-table
+            :style="theight"
+            style="margin-top:0px"
+            border
+            stripe
+            :data="product"
+            row-key="id"
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
+            <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.fill_in_date"></el-input>
+              </template>
             </el-table-column>
-            <el-table-column label="工艺表一"  align="center" >
-            <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="120"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120"></el-table-column>
+            <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120">
+              <template slot-scope="scope">
+                <el-select v-model="scope.row.notice_number">
+                  <el-option
+                    v-for="option in options"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  ></el-option>
+                </el-select>
+              </template>
             </el-table-column>
-              <el-table-column label="数量" align="center" >
-            <el-table-column prop="delivery_date" label="定额工时" align="center" width="120"></el-table-column>
-              </el-table-column>
-              <el-table-column>
-            <el-table-column prop="delivery_place" label="调试工时" align="center" width="120"></el-table-column>
-            <el-table-column prop="state" label="备注" align="center" min-width="120"></el-table-column>
-              </el-table-column>
+            <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.order_unit"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.delivery_date"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.delivery_place"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="state" label="备注" align="center" min-width="100">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.state"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" align="center" width="110">
+              <template slot-scope="scope">
+                <el-tooltip content="添加设备" placement="top-start" effect="light">
+                  <el-button type="text" icon="el-icon-plus" size="small"></el-button>
+                </el-tooltip>
+                <el-tooltip content="删除本道工序" placement="top-end" effect="light">
+                  <el-button
+                    @click.native.prevent="deleteRow(scope.$index, product)"
+                    type="text"
+                    icon="el-icon-delete"
+                    size="small"
+                  ></el-button>
+                </el-tooltip>
+              </template>
+            </el-table-column>
           </el-table>
-      </el-form>
-
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="close">关闭</el-button>
+        </div>
+        <!-- 新增的工艺表  -->
+        <div :class="t2">
+          <el-row>
+            <el-form-item
+              label="工艺表二"
+              style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px; margin-top:20px"
+            >
+              <el-button-group>
+                <el-button type="text" icon="el-icon-plus" @click="thirdadd2">新增</el-button>
+                <el-tooltip content="删除此工艺表" placement="top-start" effect="light">
+                  <el-button type="text" icon="el-icon-delete" @click="thirddelete">删除</el-button>
+                </el-tooltip>
+              </el-button-group>
+              <el-input-number
+                v-model="basics.n2"
+                placeholder="数量"
+                size="small"
+                style="width:150px"
+                :min="0"
+                :max="5"
+              ></el-input-number>
+            </el-form-item>
+          </el-row>
+          <el-table
+            :style="theight"
+            style="margin-top:0px"
+            border
+            stripe
+            :data="product2"
+            row-key="id"
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
+            <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
+            <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.fill_in_date"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120">
+              <template slot-scope="scope">
+                <el-select v-model="scope.row.notice_number">
+                  <el-option
+                    v-for="option in options"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  ></el-option>
+                </el-select>
+              </template>
+            </el-table-column>
+            <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.order_unit"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.delivery_date"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.delivery_place"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column prop="state" label="备注" align="center" min-width="100">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.state"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" align="center" width="110">
+              <template slot-scope="scope">
+                <el-tooltip content="添加设备" placement="top-start" effect="light">
+                  <el-button type="text" icon="el-icon-plus" size="small"></el-button>
+                </el-tooltip>
+                <el-tooltip content="删除本道工序" placement="top-end" effect="light">
+                  <el-button
+                    @click.native.prevent="deleteRow(scope.$index, product2)"
+                    type="text"
+                    icon="el-icon-delete"
+                    size="small"
+                  ></el-button>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
-    </el-dialog>
+    </el-form>
+
+    <div slot="footer" class="dialog-footer">
+      <el-button type="primary" @click="close">保存</el-button>
+      <el-button @click="close">关闭</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 
@@ -67,25 +222,24 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
 
-
-
 @Component({
-  components: {
-
-  }
+  components: {}
 })
 export default class DialogDetail extends Vue {
   public $refs!: {
-    form: any,
+    form: any
     addProduct: any
   }
+
+  theight: string = ''
+  t2: string = 't2'
 
   title: string = '新增生产通知单'
   visible: boolean = false
   formDetail: any = {
     con: ''
   }
-   basics: any = {
+  basics: any = {
     name: 'D1118-02',
     order_unit: 'NP-700齿轮',
     num: '5'
@@ -96,22 +250,9 @@ export default class DialogDetail extends Vue {
     },
     {
       orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    },
+    }
+  ]
+  product2: any[] = [
     {
       orderNumber: ''
     },
@@ -128,19 +269,42 @@ export default class DialogDetail extends Vue {
     {
       handle_name: '',
       handle_by: ''
-    },
+    }
   ]
-  thirdadd(){}
+  thirdadd() {
+    const add = {
+      fill_in_date: '输入...'
+    }
 
+    this.product.unshift(add)
+    this.theight = 'height:100%'
+  }
+  thirdadd2() {
+    const add = {
+      fill_in_date: '输入...'
+    }
+
+    this.product2.unshift(add)
+    this.theight = 'height:100%'
+  }
+
+  thirddelete() {
+    this.t2 = 't2'
+  }
+  deleteRow(index, rows) {
+    rows.splice(index, 1)
+  }
+  Add() {
+    this.t2 = 't'
+  }
   open(isNew = true) {
     if (isNew) {
       this.title = '返修处理'
     } else {
-      this.title = ''
+      this.title = '产品通知工艺设计'
     }
     this.visible = true
   }
- 
 
   save() {
     this.visible = false
@@ -167,7 +331,7 @@ export default class DialogDetail extends Vue {
       flex: 1;
       // height: 450px;
       overflow: auto;
-      .information{
+      .information {
         margin-top: 20px;
       }
       .el-input__inner {
@@ -176,7 +340,12 @@ export default class DialogDetail extends Vue {
         color: #000;
         cursor: not-allowed;
       }
-      
+      .tab {
+        height: 50vh;
+        .t2 {
+          display: none;
+        }
+      }
     }
     .el-dialog__footer {
       border-top: 1px solid #eee;

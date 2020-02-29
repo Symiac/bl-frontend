@@ -5,6 +5,7 @@
     :title="title"
     :visible.sync="visible"
     append-to-body
+    class="six"
   >
     <el-form class="information">
       <el-row>
@@ -46,13 +47,12 @@
             </el-select>
           </el-form-item>
         </el-col>
-        
       </el-row>
-<el-row>
-          <el-button-group>
-            <el-button type="text" icon="el-icon-plus" @click="add">新增</el-button>
-          </el-button-group>
-        </el-row>
+      <el-row>
+        <el-button-group>
+          <el-button type="text" icon="el-icon-plus" @click="add">新增</el-button>
+        </el-button-group>
+      </el-row>
       <el-table
         :style="theight"
         style="margin-top:10px"
@@ -60,10 +60,9 @@
         stripe
         :data="product"
         row-key="id"
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-      >
+        :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
         <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-        <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="120">
+        <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
           <template slot-scope="scope">
             <el-input v-model="scope.row.fill_in_date"></el-input>
           </template>
@@ -81,15 +80,16 @@
           </template>
         </el-table-column>
         <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
-        <template slot-scope="scope">
+          <template slot-scope="scope">
             <el-input v-model="scope.row.order_unit"></el-input>
-          </template></el-table-column>
-        <el-table-column prop="delivery_date" label="定额工时" align="center" width="120">
+          </template>
+        </el-table-column>
+        <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
           <template slot-scope="scope">
             <el-input v-model="scope.row.delivery_date"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="delivery_place" label="调试工时" align="center" width="120">
+        <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
           <template slot-scope="scope">
             <el-input v-model="scope.row.delivery_place"></el-input>
           </template>
@@ -99,19 +99,27 @@
             <el-input v-model="scope.row.state"></el-input>
           </template>
         </el-table-column>
-        <el-table-column
-      label="操作"
-      align="center"
-      width="80">
-      <template slot-scope="scope">
-        <el-button
-          @click.native.prevent="deleteRow(scope.$index, product)"
-          type="text"
-          icon="el-icon-delete"
-          size="small">
-        </el-button>
-      </template>
-    </el-table-column>
+        <el-table-column label="操作" align="center" width="110">
+          <template slot-scope="scope">
+             <el-tooltip content="添加设备" placement="top-start" effect="light">
+            <el-button
+              @click="addRow()"
+              type="text"
+              icon="el-icon-plus"
+              size="small"
+            ></el-button>
+             </el-tooltip>
+            <el-tooltip content="删除本道工序" placement="top-end" effect="light">
+            <el-button
+              @click.native.prevent="deleteRow(scope.$index, product)"
+              type="text"
+              icon="el-icon-delete"
+              size="small"
+            ></el-button>
+            </el-tooltip>
+        <add-product ref="addproduct"></add-product>    
+          </template>
+        </el-table-column>
       </el-table>
     </el-form>
 
@@ -126,13 +134,17 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
+import AddProduct from './addProduct.vue'
 
 @Component({
-  components: {}
+  components: {
+    AddProduct
+  }
 })
 export default class DialogDetail extends Vue {
   public $refs!: {
     form: any
+    addproduct:any
   }
   theight: string = ''
   title: string = '新增工艺版本'
@@ -144,19 +156,19 @@ export default class DialogDetail extends Vue {
     radio: '1'
   }
   product: any[] = [
-     {
-      id:'1',
-      orderNumber: '1',
-     },
-      {
-      id:'2',
-      orderNumber: '2',
-      },
     {
-      id:'3',
+      id: '1',
+      orderNumber: '1'
+    },
+    {
+      id: '2',
+      orderNumber: '2'
+    },
+    {
+      id: '3',
       orderNumber: '3',
-      order_unit:'加工',
-     /* children: [{
+      order_unit: '加工'
+      /* children: [{
               id: '',
               order_unit:'设备A',
               
@@ -167,9 +179,9 @@ export default class DialogDetail extends Vue {
           */
     },
     {
-      id:'4',
-      orderNumber: '4',
-      },
+      id: '4',
+      orderNumber: '4'
+    }
   ]
 
   options: any[] = [
@@ -197,7 +209,7 @@ export default class DialogDetail extends Vue {
   }
   add() {
     const add = {
-      
+      fill_in_date: '输入...'
     }
 
     this.product.unshift(add)
@@ -205,11 +217,12 @@ export default class DialogDetail extends Vue {
   }
 
   deleteRow(index, rows) {
-        rows.splice(index, 1);
-      }
-  onSelectChange(){
-    
+    rows.splice(index, 1)
   }
+  addRow() {
+    this.$refs.addproduct.open()
+  }
+  onSelectChange() {}
   save() {
     this.visible = false
     this.$alert('保存成功！', '操作成功', {
@@ -224,6 +237,7 @@ export default class DialogDetail extends Vue {
 </script>
 
 <style lang="scss">
+.six{
 .el-dialog__wrapper {
   overflow: hidden;
   .el-dialog {
@@ -257,5 +271,6 @@ export default class DialogDetail extends Vue {
       }
     }
   }
+}
 }
 </style>

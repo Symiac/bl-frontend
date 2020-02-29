@@ -27,17 +27,17 @@
     </el-form>
     <el-form class="information">
       <el-form-item label="合格" prop="pp" label-width="150px">
-        <el-input-number v-model="form.n"  style="width:150px" size="small" :min="0"></el-input-number>
+        <el-input-number v-model="form.n"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
 
       <el-form-item label="工废" prop="name" label-width="150px">
-        <el-input-number v-model="form.name"  style="width:150px" size="small" :min="0"></el-input-number>
+        <el-input-number v-model="form.name"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
       <el-form-item label="返修" prop="aa" label-width="150px">
-        <el-input-number v-model="form.aa"  style="width:150px" size="small" :min="0"></el-input-number>
+        <el-input-number v-model="form.aa"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
       <el-form-item label="废料" prop="num" label-width="150px">
-        <el-input-number v-model="form.num"  style="width:150px" size="small" :min="0"></el-input-number>
+        <el-input-number v-model="form.num"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
     </el-form>
 

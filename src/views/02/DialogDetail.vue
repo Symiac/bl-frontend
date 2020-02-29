@@ -5,6 +5,7 @@
       :title="title"
       :visible.sync="visible"
       append-to-body
+      class="dd"
     >
       <el-form class="information">
       
@@ -63,7 +64,7 @@ import { State, namespace } from 'vuex-class'
 export default class DialogDetail extends Vue {
   public $refs!: {
     form: any,
-    addProduct: any
+
   }
 
   title: string = '新增生产通知单'
@@ -130,9 +131,7 @@ export default class DialogDetail extends Vue {
     this.visible = true
   }
 
-  addProduct(){
-       this.$refs.addProduct.open()
-  }
+
   save() {
     this.visible = false
     this.$alert('保存成功！', '操作成功', {
@@ -147,10 +146,11 @@ export default class DialogDetail extends Vue {
 </script>
 
 <style lang="scss">
+.dd{
 .el-dialog__wrapper {
   overflow: hidden;
   .el-dialog {
-    height: 90vh;
+    max-height: 90vh;
     margin-top: 5vh !important;
     display: flex;
     flex-direction: column;
@@ -181,5 +181,6 @@ export default class DialogDetail extends Vue {
       }
     }
   }
+}
 }
 </style>

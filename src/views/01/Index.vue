@@ -328,7 +328,7 @@ export default class Index extends Vue {
         background: #fff;
       }
       &:focus {
-        background: #e16003;
+        background: #FF0000;
         color: #fff;
       }
     }

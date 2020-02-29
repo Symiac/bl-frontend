@@ -96,7 +96,160 @@
         </template>
       </layout>
     </el-tab-pane>
-    <el-tab-pane label="产品通知" name="second"></el-tab-pane>
+    <el-tab-pane label="产品通知" name="second">
+      <layout style="padding:0 0;">
+        <template slot="operation">
+          <div class="operation-left">
+            <div class="total">
+              <div class="total_title" @click="show">
+                <el-progress
+                  type="dashboard"
+                  :percentage="60"
+                  color="#1989fa"
+                  style="margin-top:20px"
+                ></el-progress>
+                <p class="text">19-034</p>
+                <p class="text">东亚利根</p>
+              </div>
+            </div>
+            <div class="total">
+              <div class="total_title" @click="show2">
+                <el-progress
+                  type="dashboard"
+                  :percentage="50"
+                  color="#1989fa"
+                  style="margin-top:20px"
+                ></el-progress>
+                <p class="text">19-035</p>
+                <p class="text">东亚利根</p>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template slot="content">
+          <div :class="s1">
+            <el-form style="background:#fff">
+              <el-row>
+                <el-col :span="7">
+                  <el-form-item label="通知单号" label-width="120px" prop="name">
+                    <el-input
+                      class="inline-input"
+                      style="width:100%"
+                      v-model="basics.name"
+                      placeholder
+                    ></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="7">
+                  <el-form-item label="订货单位" label-width="120px" prop="type">
+                    <el-select
+                      v-model="basics.order_unit"
+                      style="width:150px"
+                      placeholder="输入产品名称"
+                      clearable
+                    >
+                      <el-option label="BL1901" value="01"></el-option>
+                      <el-option label="BL1902" value="02"></el-option>
+                      <el-option label="（历史记录）" value="03"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-table
+                height="100%"
+                border
+                stripe
+                :data="tableData"
+                row-key="id"
+                @row-dblclick="DoubleClick2"
+              >
+                <el-table-column type="selection" fixed width="40"></el-table-column>
+                <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
+                <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
+                <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
+                <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
+                <el-table-column
+                  prop="delivery_date"
+                  label="数量"
+                  sortable
+                  align="center"
+                  width="100"
+                ></el-table-column>
+                <el-table-column
+                  prop="delivery_place"
+                  label="交货日期"
+                  sortable
+                  align="center"
+                  width="120"
+                ></el-table-column>
+                <el-table-column prop="dd" label="状态" align="center" width="100"></el-table-column>
+                <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
+              </el-table>
+            </el-form>
+          </div>
+          <div :class="s2">
+            <el-form style="background:#fff">
+              <el-row>
+                <el-col :span="7">
+                  <el-form-item label="通知单号" label-width="120px" prop="name">
+                    <el-input
+                      class="inline-input"
+                      style="width:100%"
+                      v-model="basics.names"
+                      placeholder
+                    ></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="7">
+                  <el-form-item label="订货单位" label-width="120px" prop="type">
+                    <el-select
+                      v-model="basics.order_unit"
+                      style="width:150px"
+                      placeholder="输入产品名称"
+                      clearable
+                    >
+                      <el-option label="BL1901" value="01"></el-option>
+                      <el-option label="BL1902" value="02"></el-option>
+                      <el-option label="（历史记录）" value="03"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-table
+                height="100%"
+                border
+                stripe
+                :data="tableDatas"
+                row-key="id"
+                @row-dblclick="DoubleClick2"
+              >
+                <el-table-column type="selection" fixed width="40"></el-table-column>
+                <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
+                <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
+                <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
+                <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
+                <el-table-column
+                  prop="delivery_date"
+                  label="数量"
+                  sortable
+                  align="center"
+                  width="100"
+                ></el-table-column>
+                <el-table-column
+                  prop="delivery_place"
+                  label="交货日期"
+                  sortable
+                  align="center"
+                  width="120"
+                ></el-table-column>
+                <el-table-column prop="dd" label="状态" align="center" width="100"></el-table-column>
+                <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
+              </el-table>
+            </el-form>
+          </div>
+        </template>
+      </layout>
+    </el-tab-pane>
     <el-tab-pane label="返修处理" name="third">
       <layout style="padding:0 0;">
         <template slot="search">
@@ -139,7 +292,7 @@
               </el-form-item>
             </div>
             <div class="search-right">
-              <el-button @click="clear">清空</el-button>
+              <el-button>清空</el-button>
               <el-button type="primary">查询</el-button>
               <el-button type="primary">
                 <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
@@ -202,7 +355,7 @@
               </el-form-item>
             </div>
             <div class="search-right">
-              <el-button @click="clear">清空</el-button>
+              <el-button>清空</el-button>
               <el-button type="primary">查询</el-button>
               <el-button type="primary">
                 <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
@@ -393,40 +546,83 @@ import SixAdd from './sixAdd.vue'
 })
 export default class Index extends Vue {
   public $refs!: {
-    dialog: any,
-    first: any,
-    third: any,
-    four:any,
-    five: any,
+    dialog: any
+    first: any
+    third: any
+    four: any
+    five: any
     six: any
   }
   selected: boolean = false
   singleSelected: boolean = false
   selection: any[] = []
   value1: string = ''
+  s1: string = 's1'
+  s2: string = 's2'
   formSearch: any = {
     post: '',
     data: ''
     // keyword:''
   }
+  basics: any = {
+    name: '19-034',
+    names:'19-035',
+    order_unit: '东亚利根'
+  }
 
-  tableData: any[] = [
-    {},
+ tableData: any[] = [
     {
-      post: '中国铁建',
-      type: '管理办法类',
-      shouldNum: 9,
-      alreadyNum: 3,
-      notNum: 0
+      dd: '待处理'
     },
     {
-      post: '中铁一局',
-      type: '操作说明类',
-      shouldNum: 2,
-      alreadyNum: 1,
-      notNum: 0
+      dd: '待处理'
+    },
+    {
+      dd: '已处理'
+    },
+    {
+      dd: '已处理'
+    },
+    {
+      dd: '已处理'
     }
   ]
+
+  tableDatas: any[] = [
+    {
+      dd: '待处理'
+    },
+    {
+      dd: '待处理'
+    },
+    {
+      dd: '待处理'
+    },
+    {
+      dd: '待处理'
+    },
+    {
+      dd: '已处理'
+    },
+    {
+      dd: '已处理'
+    },
+    {
+      dd: '已处理'
+    },
+    {
+      dd: '已处理'
+    }
+  ]
+
+  total: any = {
+    all_total: '80',
+    submit_total: '5',
+    audit_total: '5',
+    approve_total: '15',
+    in_total: '30',
+    end_total: '15'
+  }
 
   secondTable: any[] = [
     {
@@ -481,9 +677,7 @@ export default class Index extends Vue {
   }
   created() {
     // console.log(this.$router)
-    // console.log(this.$route.path)
-    this.sum()
-    this.thirdsum()
+ 
   }
   add() {
     this.$refs.dialog.open(true)
@@ -496,6 +690,9 @@ export default class Index extends Vue {
   }
   firstReview() {
     this.$refs.first.open(true)
+  }
+  DoubleClick2(){
+    this.$refs.third.open(false)
   }
   thirdReview() {
     this.$refs.third.open(true)
@@ -510,140 +707,48 @@ export default class Index extends Vue {
     this.$refs.six.open(true)
   }
 
-  sum() {
-    const sumdata = {
-      name: '',
-      type: '',
-      release: '',
-      release_by: '',
-      state: '合计',
-      lookNum: 0
-    }
-
-    for (let row of this.tableData) {
-      row.notNum = row.shouldNum + row.alreadyNum
-    }
-    for (let row of this.secondTable) {
-      sumdata.lookNum += row.lookNum
-    }
-    this.secondTable.unshift(sumdata)
+  show() {
+    this.s2 = 's2'
+    this.s1 = 's'
   }
-
-  thirdsum() {
-    const thirdsum = {
-      post: '',
-      depertment: '',
-      personname: '合计',
-      userNum: 0
-    }
-    for (let row of this.thirdTable) {
-      thirdsum.userNum += row.userNum
-    }
-    this.thirdTable.unshift(thirdsum)
+  show2() {
+    this.s1 = 's1'
+    this.s2 = 's'
   }
-
-  changeCss({ row, rowIndex }) {
-    if (row.post === '合计') {
-      return 'background:#eff3fa'
-    }
-  }
-  remove() {
-    this.$alert('您选了“启用”或“禁用”的数据，不能删除！', '错误提示', {
-      confirmButtonText: '确定',
-      type: 'error',
-      callback: action => {
-        // this.$message({
-        //   type: 'info',
-        //   message: `action: ${action}`
-        // })
-        if (action === 'confirm') {
-          this.$confirm('是否禁用所选数据?', '操作提示', {
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            type: 'warning'
-          })
-            .then(() => {
-              this.$alert('禁用成功！', '操作成功', {
-                confirmButtonText: '确定',
-                type: 'success'
-              })
-            })
-            .catch(() => {
-              this.$message({
-                type: 'info',
-                message: '已取消禁用'
-              })
-            })
-        }
-      }
-    })
-  }
-  enable() {
-    this.$confirm('是否启用所选数据?', '操作提示', {
-      cancelButtonText: '取消',
-      confirmButtonText: '确定',
-      type: 'warning'
-    })
-      .then(() => {
-        this.$alert('启用成功！', '操作成功', {
-          confirmButtonText: '确定',
-          type: 'success'
-        })
-      })
-      .catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消启用'
-        })
-      })
-  }
-
-  refresh() {
-    // this.$alert('您选择了2条不是“暂存”或“不通过”状态的数据，不能进行提交操作，请重新选择！', '错误提示', {
-    // confirmButtonText: '确定',
-    // type: 'error'
-    //})
-  }
-  export() {}
-  clear() {
-    this.value1 = ''
-    // this.formSearch.keyword = ''
-  }
-  selectionChange(selection: any) {
-    this.selected = selection.length > 0
-    this.singleSelected = selection.length === 1
-    console.log(selection)
-  }
-  sizeChange() {}
-  currentChange() {}
+  clear(){}
 }
 </script>
 
 <style lang="scss">
-.p01 {
-}
-//起止日期
-.data {
-  height: 30px;
-  line-height: 30px;
-  // padding: 0 15px !important;
-}
-.el-date-editor .el-range__icon {
-  line-height: 25px;
-}
-.el-date-editor .el-range-separator {
-  line-height: 23px;
-}
-//起止日期结束
-
-//上传文件
-.el-upload {
+.total {
+  float: left;
   display: inline;
-}
+  border: 1px solid #ccc;
+  margin-right: 30px;
+  .total_title {
+    width: 200px;
+    color: #000;
+    height: 230px;
+    line-height: 30px;
+    text-align: center;
+    .text {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 5px;
+    }
+  }
 
-.el-upload-list,
-.el-upload-list--text {
-  margin: -38px 0px 0px 160px;
+  &:hover {
+    color: #000;
+    background: #fff;
+  }
 }
-//上传文件end
+.s1 {
+ 
+  display: none;
+}
+.s2 {
+  height:100px;
+  display: none;
+}
 </style>

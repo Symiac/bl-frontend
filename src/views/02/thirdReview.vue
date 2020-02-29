@@ -239,6 +239,20 @@ export default class DialogDetail extends Vue {
   formDetail: any = {
     con: ''
   }
+   options: any[] = [
+    {
+      value: '00',
+      label: '采购'
+    },
+    {
+      value: '01',
+      label: '加工'
+    },
+    {
+      value: '02',
+      label: '外协'
+    }
+  ]
   basics: any = {
     name: 'D1118-02',
     order_unit: 'NP-700齿轮',

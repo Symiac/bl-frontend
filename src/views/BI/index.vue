@@ -25,10 +25,10 @@
                </div>
                <div class="l-bottom">
                    <div class="l-b-l">
-                       <canvas id="l-b-l"></canvas>
+                       <img src="../../assets/agv_sallary.png" alt="">
                    </div>
                    <div class="l-b-r">
-                       <canvas id="l-b-r"></canvas>
+                       <img id="summary" src="../../assets/summary.png" alt="">
                    </div>
                </div>
            </div>
@@ -40,7 +40,11 @@
 <script>
     export default {
        data(){
-           return {}
+           return {
+               tableData:[
+                   {}
+               ]
+           }
        },
        create(){
 
@@ -50,6 +54,10 @@
 
 <style lang="scss" scoped>
     .bi{
+        width: 100%;
+        height: 100%;
+        // padding: 80px 50px;
+        // background: #333;
         .outer{
             .left{
                 width:60%;
@@ -100,16 +108,37 @@
                     
                 }
                 .l-bottom{
-                    height: 55%;
-                    border: solid 3px #000;
+                    height: 45%;
+                    border: solid 2px #3333;
                     margin-top: 12px;
                     margin-left: 10px;
+                    padding:0;
+                    .l-b-l >    img{
+                        width: 280px;
+                        height: 280px;
+                        float: left;
+                        margin-top:10px;
+                        margin-bottom:0;
+                        padding:0;
+                    }
+                    .l-b-r >    img{
+                        width: 260px;
+                        height: 260px;
+                        float: right;
+                        margin-top: 10px;
+                        margin-bottom:0;
+                        padding:0
+                    }
+                    .l-b-l,.l-b-r{
+                        padding:0;
+                        margin:0;
+                    }
                 }
             }
             .right{
                  width: 38%;
-                height: 100%;
-                // background: rgb(38, 81, 145);
+                height: 87%;
+                background: rgba(38, 81, 145,.4);
                 float: right;
             }
             width: 100%;
@@ -117,9 +146,7 @@
             padding: 80px 58px;
             // background: #459
         }
-        width: 100%;
-        height: 100%;
-        padding: 80px 50px;
-        // background: #333;
+        
     }
+    
 </style>

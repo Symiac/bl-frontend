@@ -42,13 +42,46 @@ export default new Router({
       
         },
         {
-          path: '/bi',
+          path: '/bi1',
           name: 'biindex',
           meta: {
-            title: '管理',
+            title: 'bi首页',
             icon: '',
           },
           component: () => import('@/views/BI/index.vue')
+        },{
+          path: '/bi2',
+          name: 'equipment',
+          meta: {
+            title: '设备报表',
+            icon: '',
+          },
+          component: () => import('@/views/BI/equipment.vue')
+        },{
+          path: '/bi3',
+          name: 'quality',
+          meta: {
+            title: '质量报表',
+            icon: '',
+          },
+          component: () => import('@/views/BI/quality.vue')
+        },{
+          path: '/bi4',
+          name: 'salary',
+          meta: {
+            title: '报表工资',
+            icon: '',
+          },
+          component: () => import('@/views/BI/salary.vue')
+        },
+        {
+          path: '/bi5',
+          name: 'salary_all',
+          meta: {
+            title: '报表工资(公司)',
+            icon: '',
+          },
+          component: () => import('@/views/BI/salary_all.vue')
         },
       ]
     }

@@ -2,7 +2,7 @@
   <div class="dialog-review">
     <el-dialog width="900px" :close-on-click-modal="false" :title="title" :visible.sync="visible">
       <el-tabs v-model="first">
-        <el-tab-pane label="通知单详情" name="first">
+        <el-tab-pane label="通知单详情" name="first" class="information">
           <el-form>
             <el-row>
               <el-form-item label="基础信息" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
@@ -95,7 +95,7 @@
             </el-row>
             <el-row>
               <el-col :span="12">
-                <el-form-item label="交货方式" label-width="120px" prop="area" >
+                <el-form-item label="交货方式" label-width="120px" prop="area">
                   <el-radio v-model="basics.radio" label="1">统一</el-radio>
                   <el-radio v-model="basics.radio" label="2">分批</el-radio>
                 </el-form-item>
@@ -115,9 +115,43 @@
             <el-row>
               <el-form-item label="产品信息" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
             </el-row>
+            <div class="product">
+              <el-table height="100%" border stripe :data="product" row-key="id">
+                <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
+                <el-table-column prop="fill_in_date" fixed label="图号" align="left" width="120"></el-table-column>
+                <el-table-column prop="notice_number" fixed label="品名" align="center" width="120"></el-table-column>
+                <el-table-column prop="order_unit" fixed label="材质" align="center" width="120"></el-table-column>
+                <el-table-column
+                  prop="delivery_date"
+                  label="数量"
+                  sortable
+                  align="center"
+                  width="120"
+                ></el-table-column>
+                <el-table-column
+                  prop="delivery_place"
+                  label="交货日期"
+                  sortable
+                  align="center"
+                  width="120"
+                ></el-table-column>
+                <el-table-column prop="state" label="备注" align="center" min-width="120"></el-table-column>
+              </el-table>
+            </div>
             <el-row>
               <el-form-item label="办理记录" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
             </el-row>
+            <div class="handle">
+              <el-table :data="handle" border class="custom-table">
+                <el-table-column type="index" label="序号" align="right" width="50"></el-table-column>
+                <el-table-column label="操作" prop="handle_name" width="120"></el-table-column>
+                <el-table-column label="操作人" prop="handle_by" width="120"></el-table-column>
+                <el-table-column label="操作日期" prop="handle_time" width="120"></el-table-column>
+                <el-table-column label="操作结论" prop="handle_con" width="120"></el-table-column>
+                <el-table-column label="操作意见" prop="handle_remark" min-width="120"></el-table-column>
+                <!-- <el-table-column label="状态" prop="state" width="70"></el-table-column> -->
+              </el-table>
+            </div>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="审批结论" name="second">
@@ -127,14 +161,14 @@
                 <el-form-item
                   label="审批结论"
                   label-width="120px"
-                  prop="con"
+                  prop="handle_con"
                   :rules="{required: true, message: '未填写审批结论', trigger: 'blur' }"
                 >
                   <el-autocomplete
                     class="inline-input"
                     style="width:100%"
                     clearable
-                    v-model="formDetail.con"
+                    v-model="formDetail.handle_con"
                     placeholder="请填写审批结论"
                   ></el-autocomplete>
                 </el-form-item>
@@ -148,21 +182,10 @@
             v-model="formDetail.adv"
             placeholder="请填写审批结论"
                   ></el-autocomplete>-->
-                  <el-input type="textarea" :row="3" v-model="formDetail.adv"></el-input>
+                  <el-input type="textarea" :row="5" v-model="formDetail.handle_remark"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-form-item label="办理记录" label-width="120px">
-              <el-table :data="datas" border class="custom-table">
-                <el-table-column type="index" label="序号" align="right" width="50"></el-table-column>
-                <el-table-column label="办理类型" prop="type" width="80"></el-table-column>
-                <el-table-column label="办理单位" prop="unit" width="220"></el-table-column>
-                <el-table-column label="办理人" prop="handled_by" width="80"></el-table-column>
-                <el-table-column label="办理时间" prop="handled_at" width="110"></el-table-column>
-                <el-table-column label="办理意见" prop="suggestion" min-width="80"></el-table-column>
-                <!-- <el-table-column label="状态" prop="state" width="70"></el-table-column> -->
-              </el-table>
-            </el-form-item>
           </el-form>
         </el-tab-pane>
       </el-tabs>
@@ -190,6 +213,43 @@ export default class DialogDetail extends Vue {
   basics: any = {
     radio: '1'
   }
+  product: any[] = [
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    }
+  ]
+
+  handle: any[]=[
+    {
+      handle_name:'',
+      handle_by:'',
+    },
+   
+  ]
   first: string = 'first'
   visible: boolean = false
   title: string = '审核生产通知单'
@@ -198,8 +258,16 @@ export default class DialogDetail extends Vue {
     this.visible = true
   }
 
-  submitForm() {}
-  close() {}
+  submitForm() {
+    this.visible = false
+    this.$alert('保存成功！', '操作成功', {
+      confirmButtonText: '确定',
+      type: 'success'
+    })
+  }
+  close() {
+    this.visible = false
+  }
 }
 </script>
 <style lang="scss">
@@ -215,12 +283,22 @@ export default class DialogDetail extends Vue {
         flex: 1;
         // height: 450px;
         overflow: auto;
+        .information{
+        .el-form-item {
+          margin-bottom: 10px;
+        }
+        }
         .el-input__inner {
           background-color: #fff;
           border-color: #e4e7ed;
           color: #000;
           cursor: not-allowed;
         }
+        .product {
+          height: 20vh;
+          margin-bottom: 10px;
+        }
+        
       }
       .el-dialog__footer {
         border-top: 1px solid #eee;

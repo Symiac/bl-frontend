@@ -1,0 +1,149 @@
+<template>
+  <el-dialog
+    width="600px"
+    :close-on-click-modal="false"
+    :title="title"
+    :visible.sync="visible"
+    append-to-body
+  >
+    <el-form class="information">
+      <el-row>
+       
+      </el-row>
+    </el-form>
+    <el-form class="four" label-width="200px">
+      <el-form-item label="图号" prop="pp">
+        <el-select
+          class="inline-input"
+          v-model="form.pp"
+          placeholder="输入图号"
+          style="width:150px"
+        >
+          <el-option label="BL1901" value="01"></el-option>
+          <el-option label="BL1902" value="02"></el-option>
+          <el-option label="（历史记录）" value="03"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="品名" prop="name">
+        <el-input
+                class="inline-input"
+                style="width:150px"
+                v-model="form.name"
+                placeholder="输入品名"
+              ></el-input>
+      </el-form-item>
+      <el-form-item label="数量" prop="num">
+                <el-input-number v-model="form.n" size="small"  style="width:150px"  :min="0"></el-input-number>
+      </el-form-item>
+      <el-form-item label="备注" prop="working_number">
+         <el-input style="width:200px" type="textarea" :row="5" v-model="form.remark"></el-input>
+      </el-form-item>
+    </el-form>
+
+    <div slot="footer" class="dialog-footer">
+      <el-button type="primary" @click="save">下一步</el-button>
+      <el-button @click="close">关闭</el-button>
+    </div>
+    <four ref="add"></four>
+  </el-dialog>
+</template>
+
+
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { State, namespace } from 'vuex-class'
+import Four from './four.vue'
+
+@Component({
+  components: {
+    Four
+  }
+})
+export default class DialogDetail extends Vue {
+  public $refs!: {
+    form: any
+    add: any
+  }
+
+  title: string = '添加工装件'
+  visible: boolean = false
+  formDetail: any = {
+    con: ''
+  }
+  form: any = {
+  
+  }
+  basics: any = {
+    name: 'D1118-02',
+    order_unit: 'NP-700齿轮',
+    num: '5'
+  }
+  product: any[] = [
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    }
+  ]
+
+  handle: any[] = [
+    {
+      handle_name: '系统数据',
+      handle_by: ''
+    },
+    {
+      handle_name: '',
+      handle_by: ''
+    }
+  ]
+
+  open(isNew = true) {
+    if (isNew) {
+      this.title = '添加工装件'
+    } else {
+      this.title = ''
+    }
+    this.visible = true
+  }
+
+  save() {
+   this.$refs.add.open(true)
+     this.visible = false
+  }
+  close() {
+    this.visible = false
+  }
+}
+</script>
+
+<style lang="scss">
+.four{
+    margin-top: 30px;
+        .el-form-item {
+          margin-bottom: 22px;
+        }
+    
+}
+</style>

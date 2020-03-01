@@ -54,7 +54,7 @@
           <el-button class="total_btn" @click="clear">{{total.submit_total}}</el-button>
         </div>
         <div class="total">
-          <div class="total_title" style="background:#FF9900">待审批</div>
+          <div class="total_title" style="background:#FF9900">待审核</div>
           <el-button class="total_btn" @click="clear">{{total.audit_total}}</el-button>
         </div>
         <div class="total">
@@ -84,7 +84,6 @@
         <dialog-add ref="dialogAdd"></dialog-add>
          <dialog-detail ref="dialogDetail"></dialog-detail>
          <dialog-review ref="dialogReview"></dialog-review>
-         <dialog-change ref="dialogChange"></dialog-change>
          
       </div>
     </template>
@@ -122,7 +121,7 @@ import Layout from '@/views/_common/Layout.vue'
 import dialogAdd from './Dialog.vue'
 import dialogDetail from './DialogDetail.vue'
 import dialogReview from './DialogReview.vue'
-import dialogChange from './DialogChange.vue'
+
 
 
 @Component({
@@ -131,7 +130,7 @@ import dialogChange from './DialogChange.vue'
     dialogAdd,
     dialogDetail,
     dialogReview,
-    dialogChange
+
   }
 })
 export default class Index extends Vue {
@@ -139,7 +138,7 @@ export default class Index extends Vue {
     dialogAdd: any,
     dialogDetail: any,
     dialogReview: any,
-    dialogChange: any
+
   }
   selected: boolean = false
   singleSelected: boolean = false
@@ -203,7 +202,7 @@ export default class Index extends Vue {
     this.$refs.dialogReview.open(true)
   }
   changes(){
-    this.$refs.dialogChange.open(true)
+    this.$refs.dialogDetail.change()
   }
   remove() {
     this.$alert('您选了“启用”或“禁用”的数据，不能删除！', '错误提示', {
@@ -329,7 +328,7 @@ export default class Index extends Vue {
         background: #fff;
       }
       &:focus {
-        background: #e16003;
+        background: #FF0000;
         color: #fff;
       }
     }

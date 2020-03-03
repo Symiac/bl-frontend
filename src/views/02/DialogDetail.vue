@@ -22,7 +22,7 @@
           </el-col>
           <el-col :span="7">
             <el-form-item label="产品名称" label-width="120px" prop="type">
-                          <el-input v-model="basics.order_unit" style="width:120px" disabled></el-input>
+                          <el-input v-model="basics.orderUnit" style="width:120px" disabled></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="7">
@@ -34,11 +34,11 @@
 
           <el-table height="100%" style="margin-top:10px" border stripe :data="product" row-key="id">
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="120"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120"></el-table-column>
-            <el-table-column prop="delivery_date" label="定额工时" align="center" width="120"></el-table-column>
-            <el-table-column prop="delivery_place" label="调试工时" align="center" width="120"></el-table-column>
+            <el-table-column prop="fillInDate" fixed label="工序名称" align="left" width="120"></el-table-column>
+            <el-table-column prop="noticeNumber" fixed label="部门/执行" align="center" width="120"></el-table-column>
+            <el-table-column prop="orderUnit" fixed label="设备/供应商" align="center" width="120"></el-table-column>
+            <el-table-column prop="deliveryDate" label="定额工时" align="center" width="120"></el-table-column>
+            <el-table-column prop="deliveryPlace" label="调试工时" align="center" width="120"></el-table-column>
             <el-table-column prop="state" label="备注" align="center" min-width="120"></el-table-column>
           </el-table>
       </el-form>
@@ -74,7 +74,7 @@ export default class DialogDetail extends Vue {
   }
    basics: any = {
     name: 'D1118-02',
-    order_unit: 'NP-700齿轮',
+    orderUnit: 'NP-700齿轮',
     num: '5'
   }
   product: any[] = [
@@ -109,12 +109,12 @@ export default class DialogDetail extends Vue {
 
   handle: any[] = [
     {
-      handle_name: '系统数据',
-      handle_by: ''
+      handleName: '系统数据',
+      handleBy: ''
     },
     {
-      handle_name: '',
-      handle_by: ''
+      handleName: '',
+      handleBy: ''
     },
   ]
 

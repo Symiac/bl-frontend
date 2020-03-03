@@ -13,19 +13,19 @@
             <el-input
               class="inline-input"
               style="width:100%"
-              v-model="basics.name"
+              v-model="basics.drawingNumber"
               placeholder="自动填充"
             ></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="7">
           <el-form-item label="产品名称" label-width="120px" prop="type">
-            <el-input v-model="basics.order_unit" style="width:120px" disabled></el-input>
+            <el-input v-model="basics.name" style="width:120px" disabled></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="7">
           <el-form-item label="数量" label-width="120px" prop="area">
-            <el-input v-model="basics.num" style="width:120px" placeholder="产品工号" disabled></el-input>
+            <el-input v-model="basics.number" style="width:120px" placeholder="产品工号" disabled></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -47,7 +47,7 @@
                 </el-tooltip>
               </el-button-group>
               <el-input-number
-                v-model="basics.n"
+                v-model="basics.number"
                 placeholder="数量"
                 size="small"
                 style="width:150px"
@@ -66,14 +66,14 @@
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
           >
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
+            <el-table-column prop="name" fixed label="工序名称" align="left" width="110">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.fill_in_date"></el-input>
+                <el-input v-model="scope.row.name"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120">
+            <el-table-column prop="department" fixed label="部门/执行" align="center" width="120">
               <template slot-scope="scope">
-                <el-select v-model="scope.row.notice_number">
+                <el-select v-model="scope.row.department">
                   <el-option
                     v-for="option in options"
                     :key="option.value"
@@ -83,24 +83,24 @@
                 </el-select>
               </template>
             </el-table-column>
-            <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
+            <el-table-column prop="equipmentID" fixed label="设备/供应商" align="center" width="120">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.order_unit"></el-input>
+                <el-input v-model="scope.row.equipmentID"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
+            <el-table-column prop="debugHour" label="定额工时" align="center" width="110">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.delivery_date"></el-input>
+                <el-input v-model="scope.row.debugHour"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
+            <el-table-column prop="quotaHour" label="调试工时" align="center" width="110">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.delivery_place"></el-input>
+                <el-input v-model="scope.row.quotaHour"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="state" label="备注" align="center" min-width="100">
+            <el-table-column prop="remark" label="备注" align="center" min-width="100">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.state"></el-input>
+                <el-input v-model="scope.row.remark"></el-input>
               </template>
             </el-table-column>
             <el-table-column label="操作" align="center" width="110">
@@ -134,7 +134,7 @@
                 </el-tooltip>
               </el-button-group>
               <el-input-number
-                v-model="basics.n2"
+                v-model="basics.number"
                 placeholder="数量"
                 size="small"
                 style="width:150px"
@@ -153,14 +153,14 @@
             :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
           >
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
+            <el-table-column prop="name" fixed label="工序名称" align="left" width="110">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.fill_in_date"></el-input>
+                <el-input v-model="scope.row.name"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120">
+            <el-table-column prop="department" fixed label="部门/执行" align="center" width="120">
               <template slot-scope="scope">
-                <el-select v-model="scope.row.notice_number">
+                <el-select v-model="scope.row.department">
                   <el-option
                     v-for="option in options"
                     :key="option.value"
@@ -170,24 +170,24 @@
                 </el-select>
               </template>
             </el-table-column>
-            <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
+            <el-table-column prop="equipmentID" fixed label="设备/供应商" align="center" width="120">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.order_unit"></el-input>
+                <el-input v-model="scope.row.equipmentID"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
+            <el-table-column prop="debugHour" label="定额工时" align="center" width="110">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.delivery_date"></el-input>
+                <el-input v-model="scope.row.debugHour"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
+            <el-table-column prop="quotaHour" label="调试工时" align="center" width="110">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.delivery_place"></el-input>
+                <el-input v-model="scope.row.quotaHour"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="state" label="备注" align="center" min-width="100">
+            <el-table-column prop="remark" label="备注" align="center" min-width="100">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.state"></el-input>
+                <el-input v-model="scope.row.remark"></el-input>
               </template>
             </el-table-column>
             <el-table-column label="操作" align="center" width="110">
@@ -254,9 +254,9 @@ export default class DialogDetail extends Vue {
     }
   ]
   basics: any = {
-    name: 'D1118-02',
-    order_unit: 'NP-700齿轮',
-    num: '5'
+    drawingNumber: 'D1118-02',
+    name: 'NP-700齿轮',
+    number: '5'
   }
   product: any[] = [
     {
@@ -275,19 +275,10 @@ export default class DialogDetail extends Vue {
     }
   ]
 
-  handle: any[] = [
-    {
-      handle_name: '系统数据',
-      handle_by: ''
-    },
-    {
-      handle_name: '',
-      handle_by: ''
-    }
-  ]
+
   thirdadd() {
     const add = {
-      fill_in_date: '输入...'
+      name: '输入...'
     }
 
     this.product.unshift(add)
@@ -295,7 +286,7 @@ export default class DialogDetail extends Vue {
   }
   thirdadd2() {
     const add = {
-      fill_in_date: '输入...'
+      name: '输入...'
     }
 
     this.product2.unshift(add)

@@ -8,10 +8,10 @@
     append-to-body
   >
     <el-form :model="form" :rules="rules" ref="form" label-width="100px">
-      <el-form-item label="订货单位" prop="order_unit">
+      <el-form-item label="订货单位" prop="orderUnit">
         <el-select
           class="inline-input"
-          v-model="form.order_unit"
+          v-model="form.orderUnit"
           placeholder="输入订货单位"
           style="width:150px"
         >
@@ -20,10 +20,10 @@
           <el-option label="（历史记录）" value="03"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="产品工号" prop="working_number">
+      <el-form-item label="产品工号" prop="workingNumber">
         <el-select
           class="inline-input"
-          v-model="form.working_number"
+          v-model="form.workingNumber"
           placeholder="输入产品工号"
           style="width:150px"
         >
@@ -60,12 +60,12 @@ export default class DialogDetail extends Vue {
   title: string = '新增生产通知单'
   level: number = 1
   form: object = {
-    order_unit: '', //订货单位
-    working_number: '' //产品工号
+    orderUnit: '', //订货单位
+    workingNumber: '' //产品工号
   }
   rules: object = {
-    order_unit: [{ required: true, message: '请填写订货单位', trigger: 'blur' }],
-    working_number: [{ required: true, message: '请填写产品工号', trigger: 'blur' }]
+    orderUnit: [{ required: true, message: '请填写订货单位', trigger: 'blur' }],
+    workingNumber: [{ required: true, message: '请填写产品工号', trigger: 'blur' }]
   }
   inputSuggestion: any[] = [
     { id: 1, value: '数量授权' },

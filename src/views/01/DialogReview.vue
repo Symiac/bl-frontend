@@ -22,7 +22,7 @@
               <el-col :span="7">
                 <el-form-item label="订货单位" label-width="120px" prop="type">
                   <el-select
-                    v-model="basics.order_unit"
+                    v-model="basics.orderUnit"
                     style="width:150px"
                     placeholder="BL1901"
                     clearable
@@ -37,7 +37,7 @@
               <el-col :span="7">
                 <el-form-item label="产品工号" label-width="120px" prop="area">
                   <el-select
-                    v-model="basics.order_unit"
+                    v-model="basics.orderUnit"
                     style="width:150px"
                     placeholder="产品工号"
                     clearable
@@ -65,7 +65,7 @@
               <el-col :span="7">
                 <el-form-item label="交货地点" label-width="120px" prop="type">
                   <el-select
-                    v-model="basics.order_unit"
+                    v-model="basics.orderUnit"
                     style="width:150px"
                     placeholder="自动填充"
                     clearable
@@ -80,7 +80,7 @@
               <el-col :span="7">
                 <el-form-item label="运输方式" label-width="120px" prop="area">
                   <el-select
-                    v-model="basics.order_unit"
+                    v-model="basics.orderUnit"
                     style="width:150px"
                     placeholder="自动填充"
                     clearable
@@ -103,7 +103,7 @@
               <el-col :span="10">
                 <el-form-item label="交货日期" label-width="120px">
                   <el-date-picker
-                    v-model="basics.begin_time"
+                    v-model="basics.beginTime"
                     type="date"
                     placeholder="2020-07-28"
                     disabled
@@ -118,18 +118,18 @@
             <div class="product">
               <el-table height="100%" border stripe :data="product" row-key="id">
                 <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-                <el-table-column prop="fill_in_date" fixed label="图号" align="left" width="120"></el-table-column>
-                <el-table-column prop="notice_number" fixed label="品名" align="center" width="120"></el-table-column>
-                <el-table-column prop="order_unit" fixed label="材质" align="center" width="120"></el-table-column>
+                <el-table-column prop="fillInDate" fixed label="图号" align="left" width="120"></el-table-column>
+                <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="120"></el-table-column>
+                <el-table-column prop="materialQuality" fixed label="材质" align="center" width="120"></el-table-column>
                 <el-table-column
-                  prop="delivery_date"
+                  prop="deliveryDate"
                   label="数量"
                   sortable
                   align="center"
                   width="120"
                 ></el-table-column>
                 <el-table-column
-                  prop="delivery_place"
+                  prop="deliveryPlace"
                   label="交货日期"
                   sortable
                   align="center"
@@ -144,11 +144,11 @@
             <div class="handle">
               <el-table :data="handle" border class="custom-table">
                 <el-table-column type="index" label="序号" align="right" width="50"></el-table-column>
-                <el-table-column label="操作" prop="handle_name" width="120"></el-table-column>
-                <el-table-column label="操作人" prop="handle_by" width="120"></el-table-column>
-                <el-table-column label="操作日期" prop="handle_time" width="120"></el-table-column>
-                <el-table-column label="操作结论" prop="handle_con" width="120"></el-table-column>
-                <el-table-column label="操作意见" prop="handle_remark" min-width="120"></el-table-column>
+                <el-table-column label="操作" prop="handleName" width="120"></el-table-column>
+                <el-table-column label="操作人" prop="handleBy" width="120"></el-table-column>
+                <el-table-column label="操作日期" prop="handleTime" width="120"></el-table-column>
+                <el-table-column label="操作结论" prop="handleCon" width="120"></el-table-column>
+                <el-table-column label="操作意见" prop="handleRemark" min-width="120"></el-table-column>
                 <!-- <el-table-column label="状态" prop="state" width="70"></el-table-column> -->
               </el-table>
             </div>
@@ -161,14 +161,14 @@
                 <el-form-item
                   label="审批结论"
                   label-width="120px"
-                  prop="handle_con"
+                  prop="handleCon"
                   :rules="{required: true, message: '未填写审批结论', trigger: 'blur' }"
                 >
                   <el-autocomplete
                     class="inline-input"
                     style="width:100%"
                     clearable
-                    v-model="formDetail.handle_con"
+                    v-model="formDetail.handleCon"
                     placeholder="请填写审批结论"
                   ></el-autocomplete>
                 </el-form-item>
@@ -182,7 +182,7 @@
             v-model="formDetail.adv"
             placeholder="请填写审批结论"
                   ></el-autocomplete>-->
-                  <el-input type="textarea" :row="5" v-model="formDetail.handle_remark"></el-input>
+                  <el-input type="textarea" :row="5" v-model="formDetail.handleRemark"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -245,8 +245,8 @@ export default class DialogDetail extends Vue {
 
   handle: any[]=[
     {
-      handle_name:'',
-      handle_by:'',
+      handleName:'',
+      handleBy:'',
     },
    
   ]

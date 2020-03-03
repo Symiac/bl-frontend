@@ -28,11 +28,11 @@
                 placeholder="输入品名"
               ></el-input>
       </el-form-item>
-      <el-form-item label="材质" prop="aa">
+      <el-form-item label="材质" prop="materialQuality">
         <el-input
                 class="inline-input"
                 style="width:150px"
-                v-model="form.aa"
+                v-model="form.materialQuality"
                 placeholder="输入材质"
               ></el-input>
       </el-form-item>
@@ -44,7 +44,7 @@
                 placeholder="输入数量"
               ></el-input>
       </el-form-item>
-      <el-form-item label="备注" prop="working_number">
+      <el-form-item label="备注" prop="workingNumber">
          <el-input style="width:200px" type="textarea" :row="5" v-model="form.remark"></el-input>
       </el-form-item>
     </el-form>

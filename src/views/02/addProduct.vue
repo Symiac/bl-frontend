@@ -12,10 +12,10 @@
          <el-radio v-model="form.radio" label="1">单机</el-radio>
             <el-radio v-model="form.radio" label="2">双击</el-radio>
       </el-form-item>
-      <el-form-item label="设备" prop="pp">
+      <el-form-item label="设备" prop="equipmentID">
         <el-select
           class="inline-input"
-          v-model="form.pp"
+          v-model="form.equipmentID"
           placeholder="设备A"
           style="width:150px"
         >

@@ -15,7 +15,7 @@
       <el-form-item label="图号" prop="pp">
         <el-select
           class="inline-input"
-          v-model="form.pp"
+          v-model="form.drawingNumber"
           placeholder="输入图号"
           style="width:150px"
         >
@@ -32,10 +32,13 @@
                 placeholder="输入品名"
               ></el-input>
       </el-form-item>
-      <el-form-item label="数量" prop="num">
-                <el-input-number v-model="form.n" size="small"  style="width:150px"  :min="0"></el-input-number>
+      <el-form-item label="数量" prop="number">
+                <el-input-number v-model="form.number" size="small"  style="width:150px"  :min="0"></el-input-number>
       </el-form-item>
-      <el-form-item label="备注" prop="working_number">
+      <el-form-item label="材质" prop="materialQuality">
+                <el-input v-model="form.materialQuality" placeholder="输入材质"   style="width:150px" ></el-input>
+      </el-form-item>
+      <el-form-item label="备注" prop="remark">
          <el-input style="width:200px" type="textarea" :row="5" v-model="form.remark"></el-input>
       </el-form-item>
     </el-form>
@@ -74,9 +77,9 @@ export default class DialogDetail extends Vue {
   
   }
   basics: any = {
-    name: 'D1118-02',
-    order_unit: 'NP-700齿轮',
-    num: '5'
+    drawingNumber: 'D1118-02',
+    name: 'NP-700齿轮',
+    number: '5'
   }
   product: any[] = [
     {
@@ -108,16 +111,7 @@ export default class DialogDetail extends Vue {
     }
   ]
 
-  handle: any[] = [
-    {
-      handle_name: '系统数据',
-      handle_by: ''
-    },
-    {
-      handle_name: '',
-      handle_by: ''
-    }
-  ]
+
 
   open(isNew = true) {
     if (isNew) {

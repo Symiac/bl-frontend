@@ -24,7 +24,7 @@
         <el-col :span="7">
           <el-form-item label="订货单位" label-width="120px" prop="type">
             <el-select
-              v-model="basics.order_unit"
+              v-model="basics.orderUnit"
               style="width:150px"
               placeholder="BL1901"
               clearable
@@ -37,7 +37,7 @@
         </el-col>
         <el-col :span="7">
           <el-form-item label="产品工号" label-width="120px" prop="area">
-            <el-select v-model="basics.order_unit" style="width:150px" placeholder="产品工号" clearable>
+            <el-select v-model="basics.orderUnit" style="width:150px" placeholder="产品工号" clearable>
               <el-option label="BL1901" value="01"></el-option>
               <el-option label="BL1902" value="02"></el-option>
               <el-option label="（历史记录）" value="03"></el-option>
@@ -58,7 +58,7 @@
         </el-col>
         <el-col :span="7">
           <el-form-item label="交货地点" label-width="120px" prop="type">
-            <el-select v-model="basics.order_unit" style="width:150px" placeholder="可修改" clearable>
+            <el-select v-model="basics.orderUnit" style="width:150px" placeholder="可修改" clearable>
               <el-option label="BL1901" value="01"></el-option>
               <el-option label="BL1902" value="02"></el-option>
               <el-option label="（历史记录）" value="03"></el-option>
@@ -67,7 +67,7 @@
         </el-col>
         <el-col :span="7">
           <el-form-item label="运输方式" label-width="120px" prop="area">
-            <el-select v-model="basics.order_unit" style="width:150px" placeholder="可修改" clearable>
+            <el-select v-model="basics.orderUnit" style="width:150px" placeholder="可修改" clearable>
               <el-option label="BL1901" value="01"></el-option>
               <el-option label="BL1902" value="02"></el-option>
               <el-option label="（历史记录）" value="03"></el-option>
@@ -84,7 +84,7 @@
         </el-col>
         <el-col :span="10">
           <el-form-item label="交货日期" label-width="120px">
-            <el-date-picker v-model="basics.begin_time" type="date" placeholder="2020-07-28"></el-date-picker>
+            <el-date-picker v-model="basics.beginTime" type="date" placeholder="2020-07-28"></el-date-picker>
           </el-form-item>
         </el-col>
       </el-row>
@@ -99,29 +99,29 @@
       <div class="product">
         <el-table height="100%" border stripe :data="product" row-key="id">
           <el-table-column type="index" label="序号" align="right" width="50"></el-table-column>
-          <el-table-column prop="fill_in_date" label="图号" align="center" width="120">
+          <el-table-column prop="fillInDate" label="图号" align="center" width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.fill_in_date"></el-input>
+              <el-input v-model="scope.row.fillInDate"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="notice_number" label="品名" align="center" width="120">
+          <el-table-column prop="noticeNumber" label="品名" align="center" width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.notice_number"></el-input>
+              <el-input v-model="scope.row.noticeNumber"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="order_unit" label="材质" align="center" width="120">
+          <el-table-column prop="materialQuality" label="材质" align="center" width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.order_unit"></el-input>
+              <el-input v-model="scope.row.materialQuality"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="delivery_date" label="数量" sortable align="center" width="120">
+          <el-table-column prop="deliveryDate" label="数量" sortable align="center" width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.delivery_date"></el-input>
+              <el-input v-model="scope.row.deliveryDate"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120">
+          <el-table-column prop="deliveryPlace" label="交货日期" sortable align="center" width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.delivery_place"></el-input>
+              <el-input v-model="scope.row.deliveryPlace"></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="state" label="备注" align="center" min-width="120">
@@ -147,11 +147,11 @@
       <div class="handle">
         <el-table :data="handle" border class="custom-table">
           <el-table-column type="index" label="序号" align="right" width="50"></el-table-column>
-          <el-table-column label="操作" prop="handle_name" width="120"></el-table-column>
-          <el-table-column label="操作人" prop="handle_by" width="120"></el-table-column>
-          <el-table-column label="操作日期" prop="handle_time" width="120"></el-table-column>
-          <el-table-column label="操作结论" prop="handle_con" width="120"></el-table-column>
-          <el-table-column label="操作意见" prop="handle_remark" min-width="120"></el-table-column>
+          <el-table-column label="操作" prop="handleName" width="120"></el-table-column>
+          <el-table-column label="操作人" prop="handleBy" width="120"></el-table-column>
+          <el-table-column label="操作日期" prop="handleTime" width="120"></el-table-column>
+          <el-table-column label="操作结论" prop="handleCon" width="120"></el-table-column>
+          <el-table-column label="操作意见" prop="handleRemark" min-width="120"></el-table-column>
           <!-- <el-table-column label="状态" prop="state" width="70"></el-table-column> -->
         </el-table>
       </div>
@@ -188,26 +188,26 @@ export default class DialogDetail extends Vue {
   product: any[] = [
     {
       orderNumber: '',
-      fill_in_date: '输入...'
+      fillInDate: '输入...'
     },
     {
       orderNumber: '',
-      fill_in_date: '输入...'
+      fillInDate: '输入...'
     },
     {
       orderNumber: '',
-      fill_in_date: '输入...'
-    }
+      fillInDate: '输入...'
+    },
   ]
 
   handle: any[] = [
     {
-      handle_name: '系统数据',
-      handle_by: ''
+      handleName: '系统数据',
+      handleBy: ''
     },
     {
-      handle_name: '',
-      handle_by: ''
+      handleName: '',
+      handleBy: ''
     }
   ]
 
@@ -226,7 +226,7 @@ export default class DialogDetail extends Vue {
 
   addProduct() {
     const add = {
-      fill_in_date: '输入...'
+      fillInDate: '输入...'
     }
 
     this.product.unshift(add)

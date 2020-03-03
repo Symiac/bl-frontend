@@ -5,7 +5,7 @@
         <div class="search-left">
           <el-form-item style="margin-right:20px">
             <el-select
-              v-model="formSearch.order_unit"
+              v-model="formSearch.orderUnit"
               style="width:150px"
               placeholder="订货单位"
               clearable
@@ -17,7 +17,7 @@
           </el-form-item>
           <el-form-item>
             <el-select
-              v-model="formSearch.working_number"
+              v-model="formSearch.workingNumber"
               style="width:150px"
               placeholder="产品工号"
               clearable
@@ -28,10 +28,10 @@
             </el-select>
           </el-form-item>
           <el-form-item label="填单日期:" label-width="150">
-            <el-date-picker v-model="formSearch.begin_time" type="date" placeholder="开始日期"></el-date-picker>
+            <el-date-picker v-model="formSearch.beginTime" type="date" placeholder="开始日期"></el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-date-picker v-model="formSearch.end_time" type="date" placeholder="结束日期"></el-date-picker>
+            <el-date-picker v-model="formSearch.endTime" type="date" placeholder="结束日期"></el-date-picker>
           </el-form-item>
         </div>
         <div class="search-right">
@@ -47,27 +47,27 @@
       <div class="operation-left">
         <div class="total">
           <div class="total_title" style="background:#666666">工单总数</div>
-          <el-button class="total_btn" @click="clear">{{total.all_total}}</el-button>
+          <el-button class="total_btn" @click="clear">{{total.allTotal}}</el-button>
         </div>
         <div class="total">
           <div class="total_title" style="background:#FF0000">待提交</div>
-          <el-button class="total_btn" @click="clear">{{total.submit_total}}</el-button>
+          <el-button class="total_btn" @click="clear">{{total.submitTotal}}</el-button>
         </div>
         <div class="total">
           <div class="total_title" style="background:#FF9900">待审核</div>
-          <el-button class="total_btn" @click="clear">{{total.audit_total}}</el-button>
+          <el-button class="total_btn" @click="clear">{{total.auditTotal}}</el-button>
         </div>
         <div class="total">
           <div class="total_title" style="background:#FFCC00">待批准</div>
-          <el-button class="total_btn" @click="clear">{{total.approve_total}}</el-button>
+          <el-button class="total_btn" @click="clear">{{total.approveTotal}}</el-button>
         </div>
         <div class="total">
           <div class="total_title" style="background:#3399CC">进行中</div>
-          <el-button class="total_btn" @click="clear">{{total.in_total}}</el-button>
+          <el-button class="total_btn" @click="clear">{{total.inTotal}}</el-button>
         </div>
         <div class="total">
           <div class="total_title" style="background:#33CC66">已完工</div>
-          <el-button class="total_btn" @click="clear">{{total.end_total}}</el-button>
+          <el-button class="total_btn" @click="clear">{{total.endTotal}}</el-button>
         </div>
         <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
           <el-button type="primary" @click="add">新增</el-button>
@@ -99,14 +99,14 @@
       >
         <el-table-column type="selection" fixed width="40"></el-table-column>
         <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-        <el-table-column prop="fill_in_date" fixed label="填单日期" sortable align="left" width="120"></el-table-column>
-        <el-table-column prop="notice_number" fixed label="通知单号" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="order_unit" fixed label="订货单位" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="delivery_date" fixed label="交货日期" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="delivery_place" label="交货地点" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="delivery_state" label="交货状态" sortable align="center" width="120"></el-table-column>
-        <el-table-column prop="shipping_type" label="运输方式" sortable align="center" width="130"></el-table-column>
-        <el-table-column prop="working_number" label="产品工号" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="fillInDate" fixed label="填单日期" sortable align="left" width="120"></el-table-column>
+        <el-table-column prop="noticeNumber" fixed label="通知单号" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="orderUnit" fixed label="订货单位" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="deliveryDate" fixed label="交货日期" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="deliveryPlace" label="交货地点" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="deliveryState" label="交货状态" sortable align="center" width="120"></el-table-column>
+        <el-table-column prop="shippingType" label="运输方式" sortable align="center" width="130"></el-table-column>
+        <el-table-column prop="workingNumber" label="产品工号" sortable align="center" width="120"></el-table-column>
         <el-table-column prop="state" label="通知单状态" sortable align="center" min-width="120"></el-table-column>
       </el-table>
   
@@ -144,44 +144,44 @@ export default class Index extends Vue {
   singleSelected: boolean = false
   selection: any[] = []
   total: any = {
-    all_total: '80',
-    submit_total: '5',
-    audit_total: '5',
-    approve_total: '15',
-    in_total: '30',
-    end_total: '15'
+    allTotal: '80',
+    submitTotal: '5',
+    auditTotal: '5',
+    approveTotal: '15',
+    inTotal: '30',
+    endTotal: '15'
   }
   formSearch: any = {
-    begin_time: '', //查询开始日期
-    end_time: '', //查询结束日期
-    order_unit: '', //订货单位
-    working_number: '' //产品工号
+    beginTime: '', //查询开始日期
+    endTime: '', //查询结束日期
+    orderUnit: '', //订货单位
+    workingNumber: '' //产品工号
   }
 
   tableData: any[] = [
     {
   
-      fill_in_date: '2019-12-30',
-      notice_number: '19-034',
-      order_unit: '东亚利根',
-      delivery_date: '2020-03-11',
-      delivery_place: '大窑湾港',
-      shipping_type: '汽运',
-      working_number: 'BL1901',
+      fillInDate: '2019-12-30',
+      noticeNumber: '19-034',
+      orderUnit: '东亚利根',
+      deliveryDate: '2020-03-11',
+      deliveryPlace: '大窑湾港',
+      shippingType: '汽运',
+      workingNumber: 'BL1901',
       state: '未提交',
-      delivery_state: '成品'
+      deliveryState: '成品'
     },
     {
     
-      fill_in_date: '2019-12-30',
-      notice_number: '19-035',
-      order_unit: '东亚利根',
-      delivery_date: '2020-03-11',
-      delivery_place: '大窑湾港',
-      shipping_type: '汽运',
-      working_number: 'BL1903',
+      fillInDate: '2019-12-30',
+      noticeNumber: '19-035',
+      orderUnit: '东亚利根',
+      deliveryDate: '2020-03-11',
+      deliveryPlace: '大窑湾港',
+      shippingType: '汽运',
+      workingNumber: 'BL1903',
       state: '待审核',
-      delivery_state: '成品'
+      deliveryState: '成品'
     }
   ]
   defaultSort: object = {
@@ -284,10 +284,10 @@ export default class Index extends Vue {
   refresh() {}
   export() {}
   clear() {
-    this.formSearch.order_unit = ''
-    this.formSearch.working_number = ''
-    this.formSearch.begin_time = ''
-    this.formSearch.end_time = ''
+    this.formSearch.orderUnit = ''
+    this.formSearch.workingNumber = ''
+    this.formSearch.beginTime = ''
+    this.formSearch.endTime = ''
   }
   selectionChange(selection: any) {
     this.selected = selection.length > 0

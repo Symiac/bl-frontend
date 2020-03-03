@@ -53,11 +53,11 @@
             @row-dblclick="DoubleClick2">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
+            <el-table-column prop="fillInDate" fixed label="图号" align="center" width="100"></el-table-column>
+            <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="100"></el-table-column>
+            <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
+            <el-table-column prop="deliveryDate" label="数量" sortable align="center" width="100"></el-table-column>
+            <el-table-column prop="deliveryPlace" label="交货日期" sortable align="center" width="120"></el-table-column>
             <el-table-column prop="dd" label="状态" align="center" width="100"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
             <el-table-column label="操作" align="center" width="350">
@@ -108,11 +108,11 @@
           >
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
-            <el-table-column prop="fill_in_date" fixed label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="notice_number" fixed label="品名" align="center" width="100"></el-table-column>
-            <el-table-column prop="order_unit" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_date" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="delivery_place" label="交货日期" sortable align="center" width="120"></el-table-column>
+            <el-table-column prop="fillInDate" fixed label="图号" align="center" width="100"></el-table-column>
+            <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="100"></el-table-column>
+            <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
+            <el-table-column prop="deliveryDate" label="数量" sortable align="center" width="100"></el-table-column>
+            <el-table-column prop="deliveryPlace" label="交货日期" sortable align="center" width="120"></el-table-column>
             <el-table-column prop="dd" label="状态" align="center" width="100"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
             <el-table-column label="操作" align="center" width="350">
@@ -150,7 +150,7 @@ export default class Index extends Vue {
   basics: any = {
     name: '19-034',
     names: '19-035',
-    order_unit: '东亚利根'
+    orderUnit: '东亚利根'
   }
 
 basic:any[]=[{

@@ -12,7 +12,7 @@
         <el-col :span="7">
           <el-form-item label="工艺版本" label-width="120px" prop="area">
             <el-select
-              v-model="basics.order_unit"
+              v-model="basics.versionId"
               style="width:150px"
               placeholder="输入工艺版本号"
               clearable
@@ -28,7 +28,7 @@
             <el-input
               class="inline-input"
               style="width:100%"
-              v-model="basics.name"
+              v-model="basics.drawingNumber"
               placeholder="输入图号"
             ></el-input>
           </el-form-item>
@@ -36,7 +36,7 @@
         <el-col :span="7">
           <el-form-item label="产品名称" label-width="120px" prop="type">
             <el-select
-              v-model="basics.order_unit"
+              v-model="basics.name"
               style="width:150px"
               placeholder="输入产品名称"
               clearable
@@ -62,14 +62,14 @@
         row-key="id"
         :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
         <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-        <el-table-column prop="fill_in_date" fixed label="工序名称" align="left" width="110">
+        <el-table-column prop="name" fixed label="工序名称" align="left" width="110">
           <template slot-scope="scope">
-            <el-input v-model="scope.row.fill_in_date"></el-input>
+            <el-input v-model="scope.row.name"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="notice_number" fixed label="部门/执行" align="center" width="120">
+        <el-table-column prop="department" fixed label="部门/执行" align="center" width="120">
           <template slot-scope="scope">
-            <el-select v-model="scope.row.notice_number" @change="onSelectChange">
+            <el-select v-model="scope.row.department" @change="onSelectChange">
               <el-option
                 v-for="option in options"
                 :key="option.value"
@@ -79,24 +79,24 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column prop="order_unit" fixed label="设备/供应商" align="center" width="120">
+        <el-table-column prop="equipmentID" fixed label="设备/供应商" align="center" width="120">
           <template slot-scope="scope">
-            <el-input v-model="scope.row.order_unit"></el-input>
+            <el-input v-model="scope.row.equipmentID"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="delivery_date" label="定额工时" align="center" width="110">
+        <el-table-column prop="debugHour" label="定额工时" align="center" width="110">
           <template slot-scope="scope">
-            <el-input v-model="scope.row.delivery_date"></el-input>
+            <el-input v-model="scope.row.debugHour"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="delivery_place" label="调试工时" align="center" width="110">
+        <el-table-column prop="quotaHour" label="调试工时" align="center" width="110">
           <template slot-scope="scope">
-            <el-input v-model="scope.row.delivery_place"></el-input>
+            <el-input v-model="scope.row.quotaHour"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="state" label="备注" align="center" min-width="100">
+        <el-table-column prop="remark" label="备注" align="center" min-width="100">
           <template slot-scope="scope">
-            <el-input v-model="scope.row.state"></el-input>
+            <el-input v-model="scope.row.remark"></el-input>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="110">
@@ -167,14 +167,14 @@ export default class DialogDetail extends Vue {
     {
       id: '3',
       orderNumber: '3',
-      order_unit: '加工'
+      equipmentID: '加工'
       /* children: [{
               id: '',
-              order_unit:'设备A',
+              equipmentID:'设备A',
               
             }, {
               id: '',
-              order_unit:'设备B',
+              equipmentID:'设备B',
           }]
           */
     },
@@ -209,7 +209,7 @@ export default class DialogDetail extends Vue {
   }
   add() {
     const add = {
-      fill_in_date: '输入...'
+      name: '输入...'
     }
 
     this.product.unshift(add)

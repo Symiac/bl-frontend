@@ -1,5 +1,7 @@
 <template>
-  <layout>
+<el-tabs value="first" style="width:auto; padding:0 20px; margin-top:0px;">
+ <el-tab-pane label="产品派工" name="first">
+      <layout style="padding:0 0;">
     <template slot="operation">
       <div class="operation-left">
         <div class="order">
@@ -62,7 +64,7 @@
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
             <el-table-column label="操作" align="center" width="350">
               <template slot-scope="scope">
-                <el-button @click="addRow()" type="text" icon="el-icon-view" size="small">查看</el-button>
+                <el-button @click="lookRow()" type="text" icon="el-icon-view" size="small">查看</el-button>
 
                 <el-button @click="addRow()" type="text" icon="el-icon-s-order" size="small">派工</el-button>
 
@@ -117,36 +119,111 @@
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
             <el-table-column label="操作" align="center" width="350">
               <template slot-scope="scope">
-                <el-button @click="addRow()" type="text" icon="el-icon-view" size="small">查看</el-button>
-
+                <el-button @click="lookRow()" type="text" icon="el-icon-view" size="small">查看</el-button>
+ <Look ref="look"></Look>
                 <el-button @click="addRow()" type="text" icon="el-icon-s-order" size="small">派工</el-button>
 
                 <el-button @click="addRow()" type="text" icon="el-icon-edit" size="small">修改</el-button>
               </template>
+             
             </el-table-column>
           </el-table>
         </el-form>
       </div>
     </template>
   </layout>
+ </el-tab-pane>
+ <el-tab-pane label="工装产品下单" name="four">
+      <layout style="padding:0 0;">
+        <template slot="search">
+          <el-form inline :model="basics">
+            <div class="search-left">
+              <el-form-item>
+                <el-select
+                  v-model="basics.drawingNumber"
+                  style="width:150px"
+                  placeholder="输入图号"
+                  clearable
+                >
+                  <el-option label="中国铁建" value="01"></el-option>
+                  <el-option label="中土集团" value="02"></el-option>
+                  <el-option label="中铁十一局" value="04"></el-option>
+                  <el-option label="中铁十二局" value="05"></el-option>
+                  <el-option label="中铁二十局" value="06"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-select
+                  v-model="basics.na"
+                  style="width:150px"
+                  placeholder="输入品名"
+                  clearable
+                >
+                  <el-option label="管理工作类" value="01"></el-option>
+                  <el-option label="业务学习类" value="02"></el-option>
+                  <el-option label="操作说明类" value="03"></el-option>
+                  <el-option label="内训讲师类" value="05"></el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+            <div class="search-right">
+              <el-button>清空</el-button>
+              <el-button type="primary">查询</el-button>
+              <el-button type="primary">
+                <a href="data:text/txt;charset=utf-8,导出下载" download="资料查询.xlsx">导出</a>
+              </el-button>
+            </div>
+          </el-form>
+        </template>
+        <template slot="operation">
+          <div class="operation-left">
+            <el-button type="primary" icon="el-icon-plus">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-edit">修改</el-button>
+            <el-button type="primary" icon="el-icon-delete">删除</el-button>
+          </div>
+        </template>
+        <template slot="content">
+          <el-table height="100%" border stripe :data="tableData" row-key="id">
+            <el-table-column type="selection" fixed width="40"></el-table-column>
+            <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
+            <el-table-column prop="drawingNumber" fixed label="图号" align="center" width="120"></el-table-column>
+            <el-table-column prop="name" fixed label="品名" align="center" width="120"></el-table-column>
+             <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
+            <el-table-column prop="orderBy" fixed label="下单人" align="center" width="120"></el-table-column>
+            <el-table-column prop="number" label="数量" sortable align="center" width="120"></el-table-column>
+            <el-table-column prop="state" label="状态"  align="center" width="120"></el-table-column>
+            <el-table-column prop="remark" label="备注" align="center" min-width="120"></el-table-column>
+          </el-table>
+        </template>
+      </layout>
+    
+    </el-tab-pane>
+</el-tabs>
+
+
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
+import Look from './look.vue'
+
 
 @Component({
   components: {
-    Layout
+    Layout,
+    Look
   }
 })
 export default class Index extends Vue {
-  public $refs!: {}
+  public $refs!: {
+    look: any
+  }
 
   s1: string = 's1'
   s2: string = 's2'
-
+first: string ='first'
   basics: any = {
     name: '19-034',
     names: '19-035',
@@ -221,6 +298,9 @@ basic:any[]=[{
     this.basic[0].or='2020-03-01'
     this.basic[0].nn='BL1902'
     this.s2 = 's'
+  }
+  lookRow(){
+    this.$refs.look.open()
   }
   addRow() {}
   DoubleClick2(){}

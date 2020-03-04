@@ -58,7 +58,7 @@
             <el-table-column prop="fillInDate" fixed label="图号" align="center" width="100"></el-table-column>
             <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="100"></el-table-column>
             <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="deliveryDate" label="数量" sortable align="center" width="100"></el-table-column>
+            <el-table-column prop="number" label="数量" sortable align="center" width="100"></el-table-column>
             <el-table-column prop="deliveryPlace" label="交货日期" sortable align="center" width="120"></el-table-column>
             <el-table-column prop="dd" label="状态" align="center" width="100"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
@@ -66,9 +66,9 @@
               <template slot-scope="scope">
                 <el-button @click="lookRow()" type="text" icon="el-icon-view" size="small">查看</el-button>
 
-                <el-button @click="addRow()" type="text" icon="el-icon-s-order" size="small">派工</el-button>
+                <el-button @click="distribute()" type="text" icon="el-icon-s-order" size="small">派工</el-button>
 
-                <el-button @click="addRow()" type="text" icon="el-icon-edit" size="small">修改</el-button>
+                <el-button @click="edit()" type="text" icon="el-icon-edit" size="small">修改</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -113,17 +113,17 @@
             <el-table-column prop="fillInDate" fixed label="图号" align="center" width="100"></el-table-column>
             <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="100"></el-table-column>
             <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
-            <el-table-column prop="deliveryDate" label="数量" sortable align="center" width="100"></el-table-column>
-            <el-table-column prop="deliveryPlace" label="交货日期" sortable align="center" width="120"></el-table-column>
+            <el-table-column prop="number" label="数量" sortable align="center" width="100"></el-table-column>
+            <el-table-column prop="delivery" label="交货日期" sortable align="center" width="120"></el-table-column>
             <el-table-column prop="dd" label="状态" align="center" width="100"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="100"></el-table-column>
             <el-table-column label="操作" align="center" width="350">
               <template slot-scope="scope">
                 <el-button @click="lookRow()" type="text" icon="el-icon-view" size="small">查看</el-button>
- <Look ref="look"></Look>
-                <el-button @click="addRow()" type="text" icon="el-icon-s-order" size="small">派工</el-button>
-
-                <el-button @click="addRow()" type="text" icon="el-icon-edit" size="small">修改</el-button>
+                     <Look ref="look"></Look>
+                <el-button @click="distribute()" type="text" icon="el-icon-s-order" size="small">派工</el-button>
+                      <Distribute ref="distribute"></Distribute>
+                <el-button @click="edit()" type="text" icon="el-icon-edit" size="small">修改</el-button>
               </template>
              
             </el-table-column>
@@ -208,17 +208,19 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
 import Look from './look.vue'
-
+import Distribute from './distribute.vue'
 
 @Component({
   components: {
     Layout,
-    Look
+    Look,
+    Distribute
   }
 })
 export default class Index extends Vue {
   public $refs!: {
-    look: any
+    look: any,
+    distribute: any
   }
 
   s1: string = 's1'
@@ -242,45 +244,58 @@ basic:any[]=[{
 }]
   tableData: any[] = [
     {
+      number:'200',
       dd: '待处理'
     },
     {
+   number:'100',
       dd: '待处理'
     },
     {
+    number:'250',
       dd: '已处理'
     },
     {
+       number:'300',
       dd: '已处理'
     },
     {
+       number:'200',
       dd: '已处理'
     }
   ]
 
   tableDatas: any[] = [
     {
+       number:'200',
       dd: '待处理'
     },
     {
+       number:'100',
       dd: '待处理'
     },
     {
+       number:'100',
       dd: '待处理'
     },
     {
+       number:'200',
       dd: '待处理'
     },
     {
+       number:'200',
       dd: '已处理'
     },
     {
+       number:'300',
       dd: '已处理'
     },
     {
+       number:'300',
       dd: '已处理'
     },
     {
+       number:'250',
       dd: '已处理'
     }
   ]
@@ -302,7 +317,12 @@ basic:any[]=[{
   lookRow(){
     this.$refs.look.open()
   }
-  addRow() {}
+  distribute(){
+    this.$refs.distribute.open(true)
+  }
+  edit() {
+    this.$refs.distribute.open(false)
+  }
   DoubleClick2(){}
 }
 </script>

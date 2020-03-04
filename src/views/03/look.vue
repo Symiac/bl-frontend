@@ -15,7 +15,7 @@
               <div class="order">
                 <div class="paigong_title" @click="show">
                   <p class="text">工单号：2019001</p>
-                  <p class="text">数量：200</p>
+                  <p class="text">数量：150</p>
                   <p class="text">状态：生产中</p>
                 </div>
               </div>
@@ -39,35 +39,122 @@
             </div>
           </template>
           <template slot="content">
+            <div :class="one">
+              <el-form style="background:#fff;padding:10px;">
+                <el-row>
+                  <el-form-item
+                    label="基础信息"
+                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"
+                  ></el-form-item>
+                </el-row>
+                <el-table
+                  height="100%"
+                  border
+                  stripe
+                  :data="basic"
+                  row-key="id"
+                  style="margin-bottom: 10px; color:#000"
+                >
+                  <el-table-column prop="r" label="派工单号" align="center" width="100"></el-table-column>
+                   <el-table-column prop="dd" label="数量" align="center" width="120"></el-table-column>
+                  <el-table-column prop="or" label="填单日期" align="center" width="120"></el-table-column>
+                  <el-table-column prop="da" label="完工日期" align="center" min-width="100"></el-table-column>
+                  <el-table-column prop="f" label="通知单号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="nn" label="产品工号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="n" label="图号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="p" label="产品名称" align="center" width="120"></el-table-column>  
+                </el-table>
+                <el-row>
+                  <el-form-item
+                    label="派工单"
+                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"
+                  ></el-form-item>
+                </el-row>
 
-            <div>
-        <el-form style="background:#fff;padding:10px;">
-          <el-row>
-            <el-form-item label="基础信息" style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"></el-form-item>
-          </el-row>
-          <el-table
-            height="100%"
-            border
-            stripe
-            :data="basic"
-            row-key="id"
-            style="margin-bottom: 10px; color:#000">
-            <el-table-column prop="r" label="派工单号" align="center" width="100"></el-table-column>
-            <el-table-column prop="f"  label="通知单号" align="center" width="100"></el-table-column>
-            <el-table-column prop="nn" label="产品工号" align="center" width="100"></el-table-column>
-            <el-table-column prop="n"  label="图号" align="center" width="100"></el-table-column>
-            <el-table-column prop="p" label="产品名称"  align="center" width="120"></el-table-column>
-            <el-table-column prop="dd" label="数量" align="center" width="120"></el-table-column>
-            <el-table-column prop="or" label="填单日期" align="center" width="120"></el-table-column>
-            <el-table-column prop="da" label="完工日期"  align="center" min-width="100"></el-table-column>
-            
-          </el-table>
-          <el-row>
-            <el-form-item label="派工单" style=" width:100%;font-weight:bold;background:#fafafa"></el-form-item>
-          </el-row>
-        
-        </el-form>
-      </div>
+                <el-table
+                  height="100%"
+                  border
+                  stripe
+                  style="margin-bottom:10px"
+                  :data="product"
+                  row-key="id"
+                >
+                  <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
+                  <el-table-column prop="fillInDate" fixed label="工序名称" align="center" width="120"></el-table-column>
+                  <el-table-column prop="noticeNumber" label="部门" align="center" width="120"></el-table-column>
+                  <el-table-column prop="orderUnit" label="设备" align="center" width="120"></el-table-column>
+                  <el-table-column prop="p" label="姓名" align="center" width="120"></el-table-column>
+                  <el-table-column prop="number" label="数量" align="center" width="120"></el-table-column>
+                  <el-table-column prop="deliveryDate" label="定额工时" align="center" width="120"></el-table-column>
+                  <el-table-column prop="deliveryPlace" label="调试工时" align="center" width="120"></el-table-column>
+                  <el-table-column prop="d" label="实动工时" align="center" width="120"></el-table-column>
+                  <el-table-column prop="h" label="合格" align="center" width="120"></el-table-column>
+                  <el-table-column prop="dt" label="调试合格" align="center" width="120"></el-table-column>
+                  <el-table-column prop="s" label="待处理" align="center" width="120"></el-table-column>
+                  <el-table-column prop="e" label="工废" align="center" width="120"></el-table-column>
+                  <el-table-column prop="e" label="废料" align="center" width="120"></el-table-column>
+                  <el-table-column prop="state" label="质检确认" align="center" min-width="120"></el-table-column>
+                </el-table>
+              </el-form>
+            </div>
+            <div :class="two">
+              <el-form style="background:#fff;padding:10px;">
+                <el-row>
+                  <el-form-item
+                    label="基础信息"
+                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"
+                  ></el-form-item>
+                </el-row>
+                <el-table
+                  height="100%"
+                  border
+                  stripe
+                  :data="basic"
+                  row-key="id"
+                  style="margin-bottom: 10px; color:#000"
+                >
+                  <el-table-column prop="r" label="派工单号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="f" label="通知单号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="nn" label="产品工号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="n" label="图号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="p" label="产品名称" align="center" width="120"></el-table-column>
+                  <el-table-column prop="dd" label="数量" align="center" width="120"></el-table-column>
+                  <el-table-column prop="or" label="填单日期" align="center" width="120"></el-table-column>
+                  <el-table-column prop="da" label="完工日期" align="center" min-width="100"></el-table-column>
+                </el-table>
+                <el-row>
+                  <el-form-item
+                    label="派工单"
+                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"
+                  ></el-form-item>
+                </el-row>
+
+                <el-table
+                  height="100%"
+                  border
+                  stripe
+                  style="margin-bottom:10px"
+                  :data="product"
+                  row-key="id"
+                >
+                  <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
+                  <el-table-column prop="fillInDate" fixed label="工序名称" align="center" width="120"></el-table-column>
+                  <el-table-column prop="noticeNumber" label="部门" align="center" width="120"></el-table-column>
+                  <el-table-column prop="orderUnit" label="设备" align="center" width="120"></el-table-column>
+                  <el-table-column prop="p" label="姓名" align="center" width="120"></el-table-column>
+                  <el-table-column prop="number" label="数量" align="center" width="120"></el-table-column>
+                  <el-table-column prop="deliveryDate" label="定额工时" align="center" width="120"></el-table-column>
+                  <el-table-column prop="deliveryPlace" label="调试工时" align="center" width="120"></el-table-column>
+                  <el-table-column prop="d" label="实动工时" align="center" width="120"></el-table-column>
+                  <el-table-column prop="h" label="合格" align="center" width="120"></el-table-column>
+                  <el-table-column prop="dt" label="调试合格" align="center" width="120"></el-table-column>
+                  <el-table-column prop="s" label="待处理" align="center" width="120"></el-table-column>
+                  <el-table-column prop="e" label="工废" align="center" width="120"></el-table-column>
+                  <el-table-column prop="e" label="废料" align="center" width="120"></el-table-column>
+                  <el-table-column prop="state" label="质检确认" align="center" min-width="120"></el-table-column>
+                </el-table>
+              </el-form>
+            </div>
           </template>
         </layout>
       </el-tab-pane>
@@ -114,7 +201,7 @@
                     size="small"
                     style="width:150px"
                     :min="0"
-                    :max="5"
+                    :max="200"
                     disabled
                   ></el-input-number>
                 </el-form-item>
@@ -148,7 +235,7 @@
                     size="small"
                     style="width:150px"
                     :min="0"
-                    :max="5"
+                    :max="200"
                     disabled
                   ></el-input-number>
                 </el-form-item>
@@ -187,6 +274,9 @@ import Layout from '@/views/_common/Layout.vue'
 export default class DialogDetail extends Vue {
   public $refs!: {}
 
+
+one:string ='one'
+two: string='one'
   visible: boolean = false
   disable: boolean = true
   title: string = '查看信息'
@@ -204,9 +294,9 @@ export default class DialogDetail extends Vue {
   basics: any = {
     drawingNumber: 'D1118-02',
     name: 'NP-700齿轮',
-    number: '5',
-    number1: '3',
-    number2: '2'
+    number: '200',
+    number1: '150',
+    number2: '50'
   }
   product: any[] = [
     {
@@ -237,16 +327,18 @@ export default class DialogDetail extends Vue {
     }
   ]
 
-basic:any[]=[{
-    f:'19-034',
-    n:'B1118-025',
-    or:'2020-03-20',
-    p:'NP-700齿轮',
-    da:'2020-09-21',
-    dd:'200',
-    r:'2019001',
-    nn:'BL1901'
-}]
+  basic: any[] = [
+    {
+      f: '19-034',
+      n: 'B1118-025',
+      or: '2020-03-20',
+      p: 'NP-700齿轮',
+      da: '2020-09-21',
+      dd: '150',
+      r: '2019001',
+      nn: 'BL1901'
+    }
+  ]
 
   open() {
     this.visible = true
@@ -254,8 +346,20 @@ basic:any[]=[{
   close() {
     this.visible = false
   }
-  show() {}
-  show2() {}
+  show() {
+    this.two='one'
+    this.basic[0].r='2019001'
+     this.basic[0].dd='150'
+    this.one='t'
+    
+  }
+  show2() {
+    this.one='one'
+    this.basic[0].r='2019002'
+    this.basic[0].dd='50'
+    this.two='t'
+    
+  }
   save() {
     this.visible = false
     this.$alert('保存成功！', '操作成功', {
@@ -317,7 +421,7 @@ basic:any[]=[{
   border-radius: 15px;
   .paigong_title {
     width: 125px;
-    
+
     color: #000;
     height: 60px;
     line-height: 20px;
@@ -326,10 +430,11 @@ basic:any[]=[{
       font-size: 14px;
       font-weight: bold;
       margin: 0 5px;
-
     }
   }
+}
 
-  
+.one{
+  display: none;
 }
 </style>

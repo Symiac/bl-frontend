@@ -32,15 +32,121 @@
           </el-col>
         </el-row>
 
-          <el-table height="100%" style="margin-top:10px" border stripe :data="product" row-key="id">
+         <div class="tab">
+        <div>
+          <el-row>
+            <el-form-item
+              label="工艺表一"
+              v-model="basics.nnn"
+              style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px"
+            >
+            <!--
+              <el-button-group>
+                <el-button type="text" icon="el-icon-plus" @click="thirdadd">新增</el-button>
+                <el-tooltip content="删除此工艺表" placement="top-start" effect="light">
+                  <el-button type="text" icon="el-icon-delete" @click="thirddelete" disabled>删除</el-button>
+                </el-tooltip>
+              </el-button-group>
+              -->
+              <el-input-number
+                v-model="basics.number1"
+                placeholder="数量"
+                size="small"
+                style="width:150px"
+                :min="0"
+                :max="5"
+                disabled
+              ></el-input-number>
+              <el-select
+                v-model="basics.version"
+                placeholder="选择工艺版本"
+                style="width:150px;margin-left:10px;"
+                clearable
+                disabled
+              >
+                <el-option label="版本A" value="01"></el-option>
+                <el-option label="版本B" value="02"></el-option>
+                <el-option label="版本C" value="04"></el-option>
+                <el-option label="版本D" value="05"></el-option>
+                <el-option label="（可以选择的版本列表）" value="06"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-row>
+          <el-table
+            style="margin-top:0px"
+            border
+            stripe
+            :data="product"
+            row-key="id"
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
             <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
-            <el-table-column prop="fillInDate" fixed label="工序名称" align="left" width="120"></el-table-column>
-            <el-table-column prop="noticeNumber" fixed label="部门/执行" align="center" width="120"></el-table-column>
-            <el-table-column prop="orderUnit" fixed label="设备/供应商" align="center" width="120"></el-table-column>
-            <el-table-column prop="deliveryDate" label="定额工时" align="center" width="120"></el-table-column>
-            <el-table-column prop="deliveryPlace" label="调试工时" align="center" width="120"></el-table-column>
-            <el-table-column prop="state" label="备注" align="center" min-width="120"></el-table-column>
+            <el-table-column prop="name" fixed label="工序名称" align="left" width="110"></el-table-column>
+            <el-table-column prop="department" fixed label="部门/执行" align="center" width="120"></el-table-column>
+            <el-table-column prop="equipmentID" fixed label="设备/供应商" align="center" width="120"></el-table-column>
+            <el-table-column prop="debugHour" label="定额工时" align="center" width="110"></el-table-column>
+            <el-table-column prop="quotaHour" label="调试工时" align="center" width="110"></el-table-column>
+            <el-table-column prop="remark" label="备注" align="center" min-width="100">
+            </el-table-column>
+           
           </el-table>
+        </div>
+        <!-- 新增的工艺表  -->
+        <div>
+          <el-row>
+            <el-form-item
+              label="工艺表二"
+              style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px; margin-top:20px"
+            >
+             <!--   
+               <el-button-group>
+              <el-button type="text" icon="el-icon-plus" @click="thirdadd2">新增</el-button>  
+                <el-tooltip content="删除此工艺表" placement="top-start" effect="light">
+                  <el-button type="text" icon="el-icon-delete" @click="thirddelete">删除</el-button>
+                </el-tooltip>
+              </el-button-group>
+              -->
+              <el-input-number
+                v-model="basics.number2"
+                placeholder="数量"
+                size="small"
+                style="width:150px"
+                :min="0"
+                :max="5"
+              ></el-input-number>
+              <el-select
+                v-model="basics.version2"
+                placeholder="选择工艺版本"
+                style="width:150px;margin-left:10px;"
+                clearable
+              >
+                <el-option label="版本A" value="01"></el-option>
+                <el-option label="版本B" value="02"></el-option>
+                <el-option label="版本C" value="04"></el-option>
+                <el-option label="版本D" value="05"></el-option>
+                <el-option label="（可以选择的版本列表）" value="06"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-row>
+          <el-table
+            style="margin-top:0px"
+            border
+            stripe
+            :data="product2"
+            row-key="id"
+            :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+          >
+            <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
+            <el-table-column prop="name" fixed label="工序名称" align="left" width="110"></el-table-column>
+            <el-table-column prop="department" fixed label="部门/执行" align="center" width="120"></el-table-column>
+            <el-table-column prop="equipmentID" fixed label="设备/供应商" align="center" width="120"></el-table-column>
+            <el-table-column prop="debugHour" label="定额工时" align="center" width="110"></el-table-column>
+            <el-table-column prop="quotaHour" label="调试工时" align="center" width="110"></el-table-column>
+            <el-table-column prop="remark" label="备注" align="center" min-width="100">
+            </el-table-column>
+          </el-table>
+        </div>
+      </div>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
@@ -75,7 +181,11 @@ export default class DialogDetail extends Vue {
    basics: any = {
     name: 'D1118-02',
     orderUnit: 'NP-700齿轮',
-    num: '5'
+    num: '5',
+    number1:'',
+    number2:'',
+    version: '工艺版本A',
+    version2: '工艺版本B'
   }
   product: any[] = [
     {
@@ -96,17 +206,21 @@ export default class DialogDetail extends Vue {
     {
       orderNumber: ''
     },
-    {
-      orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    },
-    {
-      orderNumber: ''
-    }
   ]
-
+product2: any[] = [
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+]
   handle: any[] = [
     {
       handleName: '系统数据',

@@ -124,7 +124,7 @@
     </el-form>
 
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="save">保存</el-button>
+      <el-button type="primary" @click="save">提交</el-button>
       <el-button @click="close">关闭</el-button>
     </div>
   </el-dialog>
@@ -203,7 +203,7 @@ export default class DialogDetail extends Vue {
     if (isNew) {
       this.title = '新增工艺版本'
     } else {
-      this.title = ''
+      this.title = '修改工艺版本'
     }
     this.visible = true
   }

@@ -44,7 +44,7 @@
     </el-form>
 
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="save">下一步</el-button>
+      <el-button type="primary" @click="save">提交</el-button>
       <el-button @click="close">关闭</el-button>
     </div>
     <four ref="add"></four>

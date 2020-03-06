@@ -11,13 +11,7 @@
                   style="width:150px"
                   placeholder="输入图号"
                   clearable
-                >
-                  <el-option label="中国铁建" value="01"></el-option>
-                  <el-option label="中土集团" value="02"></el-option>
-                  <el-option label="中铁十一局" value="04"></el-option>
-                  <el-option label="中铁十二局" value="05"></el-option>
-                  <el-option label="中铁二十局" value="06"></el-option>
-                </el-select>
+                ></el-select>
               </el-form-item>
               <el-form-item>
                 <el-select
@@ -25,36 +19,26 @@
                   style="width:150px"
                   placeholder="产品工号"
                   clearable
-                >
-                  <el-option label="管理工作类" value="01"></el-option>
-                  <el-option label="业务学习类" value="02"></el-option>
-                  <el-option label="操作说明类" value="03"></el-option>
-                  <el-option label="内训讲师类" value="05"></el-option>
-                </el-select>
+                ></el-select>
               </el-form-item>
               <el-form-item>
-                <el-select v-model="formSearch.state" style="width:150px" placeholder="状态" clearable>
-                  <el-option label="管理工作类" value="01"></el-option>
-                  <el-option label="业务学习类" value="02"></el-option>
-                  <el-option label="操作说明类" value="03"></el-option>
-                  <el-option label="内训讲师类" value="05"></el-option>
-                </el-select>
+                <el-select
+                  v-model="formSearch.state"
+                  style="width:150px"
+                  placeholder="状态"
+                  clearable
+                ></el-select>
               </el-form-item>
               <el-form-item>
-                <el-select v-model="formSearch.type" style="width:150px" placeholder="类型" clearable>
-                  <el-option label="管理工作类" value="01"></el-option>
-                  <el-option label="业务学习类" value="02"></el-option>
-                  <el-option label="操作说明类" value="03"></el-option>
-                  <el-option label="内训讲师类" value="05"></el-option>
-                </el-select>
+                <el-select v-model="formSearch.type" style="width:150px" placeholder="类型" clearable></el-select>
               </el-form-item>
               <el-form-item>
-                <el-select v-model="formSearch.noticeNumber" style="width:150px" placeholder="通知单号" clearable>
-                  <el-option label="管理工作类" value="01"></el-option>
-                  <el-option label="业务学习类" value="02"></el-option>
-                  <el-option label="操作说明类" value="03"></el-option>
-                  <el-option label="内训讲师类" value="05"></el-option>
-                </el-select>
+                <el-select
+                  v-model="formSearch.noticeNumber"
+                  style="width:150px"
+                  placeholder="通知单号"
+                  clearable
+                ></el-select>
               </el-form-item>
             </div>
             <div class="search-right">
@@ -131,7 +115,12 @@
             <el-form style="background:#fff">
               <el-row>
                 <el-col :span="7">
-                  <el-form-item label="通知单号" label-width="120px" prop="name">
+                  <el-form-item
+                    label="通知单号"
+                    label-width="120px"
+                    prop="name"
+                    style="margin: 10px 0px"
+                  >
                     <el-input
                       class="inline-input"
                       style="width:100%"
@@ -141,19 +130,18 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="7">
-                  <el-form-item label="订货单位" label-width="120px" prop="type">
-                    <el-select
-                      v-model="basics.orderUnit"
-                      style="width:150px"
-                      placeholder="输入产品名称"
-                      clearable
-                    >
-                      <el-option label="BL1901" value="01"></el-option>
-                      <el-option label="BL1902" value="02"></el-option>
-                      <el-option label="（历史记录）" value="03"></el-option>
-                    </el-select>
+                  <el-form-item
+                    label="订货单位"
+                    label-width="120px"
+                    prop="type"
+                    style="margin: 10px 0px"
+                  >
+                    <el-select v-model="basics.orderUnit" style="width:150px" clearable></el-select>
                   </el-form-item>
                 </el-col>
+              </el-row>
+              <el-row style="margin-bottom: 10px">
+                <el-button type="primary" icon="el-icon-plus" @click="second()">设计工艺表</el-button>
               </el-row>
               <el-table
                 height="100%"
@@ -161,20 +149,14 @@
                 stripe
                 :data="tableData"
                 row-key="id"
-                @row-dblclick="DoubleClick2"
+                @row-dblclick="rowDoubleClick"
               >
                 <el-table-column type="selection" fixed width="40"></el-table-column>
                 <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
                 <el-table-column prop="drawingNumber" fixed label="图号" align="center" width="100"></el-table-column>
                 <el-table-column prop="name" fixed label="品名" align="center" width="100"></el-table-column>
                 <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
-                <el-table-column
-                  prop="number"
-                  label="数量"
-                  sortable
-                  align="center"
-                  width="100"
-                ></el-table-column>
+                <el-table-column prop="number" label="数量" sortable align="center" width="100"></el-table-column>
                 <el-table-column
                   prop="deliveryDate"
                   label="交货日期"
@@ -191,7 +173,12 @@
             <el-form style="background:#fff">
               <el-row>
                 <el-col :span="7">
-                  <el-form-item label="通知单号" label-width="120px" prop="name">
+                  <el-form-item
+                    label="通知单号"
+                    label-width="120px"
+                    prop="name"
+                    style="margin: 10px 0px"
+                  >
                     <el-input
                       class="inline-input"
                       style="width:100%"
@@ -201,19 +188,18 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="7">
-                  <el-form-item label="订货单位" label-width="120px" prop="type">
-                    <el-select
-                      v-model="basics.orderUnit"
-                      style="width:150px"
-                      placeholder="输入产品名称"
-                      clearable
-                    >
-                      <el-option label="BL1901" value="01"></el-option>
-                      <el-option label="BL1902" value="02"></el-option>
-                      <el-option label="（历史记录）" value="03"></el-option>
-                    </el-select>
+                  <el-form-item
+                    label="订货单位"
+                    label-width="120px"
+                    prop="type"
+                    style="margin: 10px 0px"
+                  >
+                    <el-select v-model="basics.orderUnit" style="width:150px" clearable></el-select>
                   </el-form-item>
                 </el-col>
+              </el-row>
+              <el-row style="margin-bottom: 10px">
+                <el-button type="primary" icon="el-icon-plus" @click="second()">设计工艺表</el-button>
               </el-row>
               <el-table
                 height="100%"
@@ -221,20 +207,14 @@
                 stripe
                 :data="tableDatas"
                 row-key="id"
-                @row-dblclick="DoubleClick2"
+                @row-dblclick="rowDoubleClick"
               >
                 <el-table-column type="selection" fixed width="40"></el-table-column>
                 <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
                 <el-table-column prop="drawingNumber" fixed label="图号" align="center" width="100"></el-table-column>
                 <el-table-column prop="name" fixed label="品名" align="center" width="100"></el-table-column>
                 <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
-                <el-table-column
-                  prop="number"
-                  label="数量"
-                  sortable
-                  align="center"
-                  width="100"
-                ></el-table-column>
+                <el-table-column prop="number" label="数量" sortable align="center" width="100"></el-table-column>
                 <el-table-column
                   prop="deliveryDate"
                   label="交货日期"
@@ -283,7 +263,12 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-select v-model="formSearch.state" style="width:150px" placeholder="状态" clearable>
+                <el-select
+                  v-model="formSearch.state"
+                  style="width:150px"
+                  placeholder="状态"
+                  clearable
+                >
                   <el-option label="管理工作类" value="01"></el-option>
                   <el-option label="业务学习类" value="02"></el-option>
                   <el-option label="操作说明类" value="03"></el-option>
@@ -302,11 +287,11 @@
         </template>
         <template slot="operation">
           <el-button-group>
-            <el-button type="primary" icon="el-icon-edit" @click="thirdReview">设计处理</el-button>
+            <el-button type="primary" icon="el-icon-edit" @click="thirdReview">设计工艺表</el-button>
           </el-button-group>
         </template>
         <template slot="content">
-          <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id"  @row-dblclick="rowDoubleClick">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="faultProcedure" label="失误工序" fixed align="center" width="120"></el-table-column>
@@ -365,19 +350,20 @@
         <template slot="operation">
           <div class="operation-left">
             <el-button type="primary" icon="el-icon-plus" @click="fourAdd">添加工装件</el-button>
-            <el-button type="primary" icon="el-icon-delete">删除</el-button>
+            <el-button type="primary" icon="el-icon-delete">删除工装件</el-button>
+            <el-button type="primary" icon="el-icon-edit" @click="four()">设计工艺表</el-button>
           </div>
         </template>
         <template slot="content">
-          <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id"  @row-dblclick="rowDoubleClick">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="drawingNumber" fixed label="图号" align="center" width="120"></el-table-column>
             <el-table-column prop="name" fixed label="品名" align="center" width="120"></el-table-column>
-             <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
+            <el-table-column prop="materialQuality" fixed label="材质" align="center" width="100"></el-table-column>
             <el-table-column prop="orderBy" fixed label="下单人" align="center" width="120"></el-table-column>
             <el-table-column prop="number" label="数量" sortable align="center" width="120"></el-table-column>
-            <el-table-column prop="state" label="状态"  align="center" width="120"></el-table-column>
+            <el-table-column prop="state" label="状态" align="center" width="120"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="120"></el-table-column>
           </el-table>
         </template>
@@ -416,7 +402,12 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-select v-model="formSearch.state" style="width:150px" placeholder="状态" clearable>
+                <el-select
+                  v-model="formSearch.state"
+                  style="width:150px"
+                  placeholder="状态"
+                  clearable
+                >
                   <el-option label="管理工作类" value="01"></el-option>
                   <el-option label="业务学习类" value="02"></el-option>
                   <el-option label="操作说明类" value="03"></el-option>
@@ -439,7 +430,7 @@
           </el-button-group>
         </template>
         <template slot="content">
-          <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id" @row-dblclick="fourDoubleClick">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="drawingNumber" fixed label="图号" align="center" width="120"></el-table-column>
@@ -499,11 +490,12 @@
         <template slot="operation">
           <div class="operation-left">
             <el-button type="primary" icon="el-icon-plus" @click="sixAdd">添加工艺版本</el-button>
+             <el-button type="primary" icon="el-icon-edit" @click="sixEdit">修改工艺版本</el-button>
             <el-button type="primary" icon="el-icon-delete">删除</el-button>
           </div>
         </template>
         <template slot="content">
-          <el-table height="100%" border stripe :data="tableData" row-key="id">
+          <el-table height="100%" border stripe :data="tableData" row-key="id"  @row-dblclick="rowDoubleClick">
             <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="orderUnit" fixed label="版本编号" align="center" width="150"></el-table-column>
@@ -561,16 +553,15 @@ export default class Index extends Vue {
   s1: string = 's1'
   s2: string = 's2'
   formSearch: any = {
-   
     // keyword:''
   }
   basics: any = {
     noticeNumber: '19-034',
-    noticeNumbers:'19-035',
+    noticeNumbers: '19-035',
     orderUnit: '东亚利根'
   }
 
- tableData: any[] = [
+  tableData: any[] = [
     {
       state: '待处理'
     },
@@ -624,11 +615,8 @@ export default class Index extends Vue {
     endTotal: '15'
   }
 
- 
-
   created() {
     // console.log(this.$router)
- 
   }
   add() {
     this.$refs.dialog.open(true)
@@ -642,20 +630,29 @@ export default class Index extends Vue {
   firstReview() {
     this.$refs.first.open(true)
   }
-  DoubleClick2(){
-    this.$refs.third.open(false)
+  second() {
+    this.$refs.third.open('2')
   }
   thirdReview() {
-    this.$refs.third.open(true)
+    this.$refs.third.open('3')
+  }
+  four() {
+    this.$refs.third.open('4')
   }
   fourAdd() {
     this.$refs.four.open(true)
+  }
+  fourDoubleClick(){
+     this.$refs.five.open(false)
   }
   fiveReview() {
     this.$refs.five.open(true)
   }
   sixAdd() {
     this.$refs.six.open(true)
+  }
+   sixEdit() {
+    this.$refs.six.open(false)
   }
 
   show() {
@@ -666,7 +663,7 @@ export default class Index extends Vue {
     this.s1 = 's1'
     this.s2 = 's'
   }
-  clear(){}
+  clear() {}
 }
 </script>
 
@@ -695,11 +692,10 @@ export default class Index extends Vue {
   }
 }
 .s1 {
- 
   display: none;
 }
 .s2 {
-  height:100px;
+  height: 100px;
   display: none;
 }
 </style>

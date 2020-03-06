@@ -3,22 +3,22 @@
     <div class="header">
         <!-- sdads -->
       <div class="form">
-        <el-select class="select"  placeholder="活动区域">
+        <el-select class="select"  placeholder="活动区域" v-model="form.nn">
           <el-option label="------2019--------" value="shanghai"></el-option>
           <el-option label="------2019--------" value="beijing"></el-option>
         </el-select>
-        <el-select class="select"  placeholder="半年">
+        <el-select class="select"  placeholder="半年" v-model="form.nn">
           <el-option label="------2019--------" value="shanghai"></el-option>
           <el-option label="------2019--------" value="beijing"></el-option>
         </el-select>
-        <el-select class="select" placeholder="月份">
+        <el-select class="select" placeholder="月份" v-model="form.nn">
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
           <el-option label="3" value="2"></el-option>
           <el-option label="4" value="2"></el-option>
           <el-option label="5" value="2"></el-option>
         </el-select>
-        <el-select class="select" placeholder="季度">
+        <el-select class="select" placeholder="季度" v-model="form.nn">
           <el-option label="------1--------" value="shanghai"></el-option>
           <el-option label="------2--------" value="beijing"></el-option>
           <el-option label="------4--------" value="beijing"></el-option>
@@ -69,7 +69,10 @@ export default {
         { date: '2019-2-1', submit_num: 100, submit_once_num: 80, name: '台车轴', trash_num: 10, once_success_rate: '80', return_rate: '10', trash_rate: '10' },
         { date: '2019-2-1', submit_num: 100, submit_once_num: 80, name: '台车轴', trash_num: 10, once_success_rate: '80', return_rate: '10', trash_rate: '10' },
         { date: '2019-2-1', submit_num: 100, submit_once_num: 80, name: '台车轴', trash_num: 10, once_success_rate: '80', return_rate: '10', trash_rate: '10' }
-      ]
+      ],
+      form:{
+
+      }
     }
   }
 }

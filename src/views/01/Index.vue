@@ -69,17 +69,20 @@
           <div class="total_title" style="background:#33CC66">已完工</div>
           <el-button class="total_btn" @click="clear">{{total.endTotal}}</el-button>
         </div>
-        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+        <div class="total" style="border: none;margin-top:50px;">
           <el-button type="primary" @click="add">新增</el-button>
         </div>
-        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+        <div class="total" style="border: none;margin-top:50px;">
           <el-button type="primary" @click="edit">修改</el-button>
         </div>
-        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+        <div class="total" style="border: none;margin-top:50px;">
           <el-button type="primary" @click="review">审核</el-button>
         </div>
-        <div class="total" style="border: none;margin-top:50px;margin-right:10px;">
+        <div class="total" style="border: none;margin-top:50px;">
           <el-button type="primary" @click="changes">变更</el-button>
+        </div>
+        <div class="total" style="border: none;margin-top:50px;">
+          <el-button type="primary" disabled>删除</el-button>
         </div>
         <dialog-add ref="dialogAdd"></dialog-add>
          <dialog-detail ref="dialogDetail"></dialog-detail>
@@ -305,7 +308,7 @@ export default class Index extends Vue {
     float: left;
     display: inline;
     border: 1px solid #ccc;
-    margin-right: 30px;
+    margin-right: 10px;
     .total_title {
       width: 120px;
       color: #fff;

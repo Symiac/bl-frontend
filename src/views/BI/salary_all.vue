@@ -3,22 +3,22 @@
     <div class="header">
         <!-- sdads -->
       <div class="form">
-        <el-select class="select"  placeholder="活动区域">
+        <el-select class="select"  placeholder="活动区域" v-model="form.nn">
           <el-option label="------2019--------" value="shanghai"></el-option>
           <el-option label="------2019--------" value="beijing"></el-option>
         </el-select>
-        <el-select class="select"  placeholder="半年">
+        <el-select class="select"  placeholder="半年" v-model="form.nn">
           <el-option label="------2019--------" value="shanghai"></el-option>
           <el-option label="------2019--------" value="beijing"></el-option>
         </el-select>
-        <el-select class="select" placeholder="月份">
+        <el-select class="select" placeholder="月份" v-model="form.nn">
           <el-option label="1" value="1"></el-option>
           <el-option label="2" value="2"></el-option>
           <el-option label="3" value="2"></el-option>
           <el-option label="4" value="2"></el-option>
           <el-option label="5" value="2"></el-option>
         </el-select>
-        <el-select class="select" placeholder="季度">
+        <el-select class="select" placeholder="季度" v-model="form.nn">
           <el-option label="------1--------" value="shanghai"></el-option>
           <el-option label="------2--------" value="beijing"></el-option>
           <el-option label="------4--------" value="beijing"></el-option>
@@ -68,7 +68,8 @@ export default {
         {  name: '张三',m_time:805.35,m_price:6040.125,d_hour:6,d_price:1080,a_hour:805.35,a_price:6040.125,a_salary:7120.125 },
         {  name: '张三',m_time:805.35,m_price:6040.125,d_hour:6,d_price:1080,a_hour:805.35,a_price:6040.125,a_salary:7120.125 },
         {  name: '张三',m_time:805.35,m_price:6040.125,d_hour:6,d_price:1080,a_hour:805.35,a_price:6040.125,a_salary:7120.125 },
-      ]
+      ],
+      form:{}
     }
   }
 }

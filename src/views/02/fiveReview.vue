@@ -27,17 +27,17 @@
     </el-form>
     <el-form class="information">
       <el-form-item label="合格" prop="numberQualified" label-width="150px">
-        <el-input-number v-model="form.numberQualified"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
+        <el-input-number v-model="form.numberQualified" :disabled="disable" style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
 
       <el-form-item label="工废" prop="numberWasteIndustrial" label-width="150px">
-        <el-input-number v-model="form.numberWasteIndustrial"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
+        <el-input-number v-model="form.numberWasteIndustrial" :disabled="disable"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
       <el-form-item label="返修" prop="numberRework" label-width="150px">
-        <el-input-number v-model="form.numberRework"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
+        <el-input-number v-model="form.numberRework"  :disabled="disable" style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
       <el-form-item label="废料" prop="numberWasteMaterial" label-width="150px">
-        <el-input-number v-model="form.numberWasteMaterial"  style="width:150px" size="small" :min="0" :max="5"></el-input-number>
+        <el-input-number v-model="form.numberWasteMaterial" :disabled="disable" style="width:150px" size="small" :min="0" :max="5"></el-input-number>
       </el-form-item>
     </el-form>
 
@@ -61,17 +61,17 @@ export default class DialogDetail extends Vue {
     form: any
     addProduct: any
   }
-
+  disable: boolean = false
   title: string = '技术评审'
   visible: boolean = false
   formDetail: any = {
     con: ''
   }
   form: any = {
-    numberQualified: 0,
+    numberQualified: 3,
     numberWasteIndustrial: 0,
-    numberRework: 0,
-    numberWasteMaterial: 0
+    numberRework: 1,
+    numberWasteMaterial: 1
   }
   basics: any = {
     drawingNumber: 'D1118-02',
@@ -113,7 +113,8 @@ export default class DialogDetail extends Vue {
     if (isNew) {
       this.title = '技术评审'
     } else {
-      this.title = ''
+      this.disable= true
+      this.title = '查看评审结果'
     }
     this.visible = true
   }

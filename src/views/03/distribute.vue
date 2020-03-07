@@ -68,13 +68,14 @@
                   <el-input v-model="scope.row.p"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="number" label="数量" align="center" width="120">
+              <el-table-column prop="number" label="数量" align="center" width="100">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.number"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="deliveryDate" label="定额工时" align="center" width="120"></el-table-column>
-              <el-table-column prop="deliveryPlace" label="调试工时" align="center" width="120"></el-table-column>
+              <el-table-column prop="deliveryDate" label="定额工时" align="center" width="100"></el-table-column>
+              <el-table-column prop="deliveryPlace" label="调试工时" align="center" min-width="100"></el-table-column>
+              <!--
               <el-table-column prop="d" label="实动工时" align="center" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.d"></el-input>
@@ -106,6 +107,7 @@
                 </template>
               </el-table-column>
               <el-table-column prop="state" label="质检确认" align="center" min-width="120"></el-table-column>
+              -->
             </el-table>
           </div>
           <div :class="d2">
@@ -164,13 +166,14 @@
                   <el-input v-model="scope.row.p"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="number" label="数量" align="center" width="120">
+              <el-table-column prop="number" label="数量" align="center" width="100">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.number"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column prop="deliveryDate" label="定额工时" align="center" width="120"></el-table-column>
-              <el-table-column prop="deliveryPlace" label="调试工时" align="center" width="120"></el-table-column>
+              <el-table-column prop="deliveryDate" label="定额工时" align="center" width="100"></el-table-column>
+              <el-table-column prop="deliveryPlace" label="调试工时" align="center" min-width="120"></el-table-column>
+              <!--
               <el-table-column prop="d" label="实动工时" align="center" width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.d"></el-input>
@@ -202,6 +205,7 @@
                 </template>
               </el-table-column>
               <el-table-column prop="state" label="质检确认" align="center" min-width="120"></el-table-column>
+              -->
             </el-table>
           </div>
         </el-form>

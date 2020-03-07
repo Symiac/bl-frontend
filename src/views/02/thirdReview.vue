@@ -29,14 +29,14 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row style="margin-bottom: 22px">
+      <el-row style="margin-bottom: 22px" :class='add'>
         <el-button type="primary" icon="el-icon-plus" @click="Add">添加工艺表</el-button>
       </el-row>
       <div class="tab">
         <div class="t1">
           <el-row>
             <el-form-item
-              label="工艺表一"
+              label="工艺表"
               v-model="basics.nnn"
               style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px"
             >
@@ -65,7 +65,6 @@
                 <el-button type="text" icon="el-icon-plus" @click="thirdadd">新建工艺版本</el-button>
                 <el-button type="text" icon="el-icon-edit" @click="thirdadd2">修改工艺版本</el-button>
                 <el-tooltip content="删除此工艺表" placement="top-start" effect="light">
-                  <el-button type="text" icon="el-icon-delete" @click="thirddelete" disabled>删除</el-button>
                 </el-tooltip>
               </el-button-group>
             </el-form-item>
@@ -214,7 +213,7 @@ export default class DialogDetail extends Vue {
 
   theight: string = ''
   t2: string = 't2'
-
+  add:string='a'
   title: string = '新增生产通知单'
   visible: boolean = false
   formDetail: any = {
@@ -249,6 +248,18 @@ export default class DialogDetail extends Vue {
     },
     {
       orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
+    },
+    {
+      orderNumber: ''
     }
   ]
   product2: any[] = [
@@ -256,6 +267,12 @@ export default class DialogDetail extends Vue {
       orderNumber: ''
     },
     {
+      orderNumber: ''
+    },{
+      orderNumber: ''
+    },{
+      orderNumber: ''
+    },{
       orderNumber: ''
     }
   ]
@@ -288,15 +305,18 @@ export default class DialogDetail extends Vue {
     switch (isNew) {
       case '2': {
         this.title = '产品通知工艺设计'
+        this.add='add'
         this.visible = true
         break
       }
       case '3': {
+        this.add='a'
         this.title = '返修处理'
         this.visible = true
         break
       }
       case '4': {
+        this.add='add'
         this.title = '工装产品工艺设计'
         this.visible = true
         break
@@ -357,5 +377,8 @@ export default class DialogDetail extends Vue {
       }
     }
   }
+}
+.add{
+  display: none;
 }
 </style>

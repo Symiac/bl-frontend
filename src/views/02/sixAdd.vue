@@ -11,16 +11,15 @@
       <el-row>
         <el-col :span="7">
           <el-form-item label="工艺版本" label-width="120px" prop="area">
-            <el-select
+            <el-input
               v-model="basics.versionId"
               style="width:150px"
-              placeholder="输入工艺版本号"
+              placeholder="系统生成"
               clearable
+              disabled
             >
-              <el-option label="BL1901" value="01"></el-option>
-              <el-option label="BL1902" value="02"></el-option>
-              <el-option label="（历史记录）" value="03"></el-option>
-            </el-select>
+           
+            </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="7">

@@ -349,7 +349,8 @@
         </template>
         <template slot="operation">
           <div class="operation-left">
-            <el-button type="primary" icon="el-icon-plus" @click="fourAdd">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-plus" @click="fourAdd()">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-edit" @click="fourEdit()">修改工装件</el-button>
             <el-button type="primary" icon="el-icon-delete">删除工装件</el-button>
             <el-button type="primary" icon="el-icon-edit" @click="four()">设计工艺表</el-button>
           </div>
@@ -641,6 +642,9 @@ export default class Index extends Vue {
   }
   fourAdd() {
     this.$refs.four.open(true)
+  }
+  fourEdit() {
+    this.$refs.four.open(false)
   }
   fourDoubleClick(){
      this.$refs.five.open(false)

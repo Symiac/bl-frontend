@@ -117,13 +117,12 @@ export default class DialogDetail extends Vue {
     if (isNew) {
       this.title = '添加工装件'
     } else {
-      this.title = ''
+      this.title = '修改工装件'
     }
     this.visible = true
   }
 
   save() {
-   this.$refs.add.open(true)
      this.visible = false
   }
   close() {

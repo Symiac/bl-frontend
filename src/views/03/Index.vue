@@ -53,7 +53,6 @@
             :data="tableData"
             row-key="id"
             @row-dblclick="DoubleClick2">
-            <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="fillInDate" fixed label="图号" align="center" width="100"></el-table-column>
             <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="100"></el-table-column>
@@ -108,7 +107,6 @@
             row-key="id"
             @row-dblclick="DoubleClick2"
           >
-            <el-table-column type="selection" fixed width="40"></el-table-column>
             <el-table-column type="index" fixed label="序号" align="right" width="50"></el-table-column>
             <el-table-column prop="fillInDate" fixed label="图号" align="center" width="100"></el-table-column>
             <el-table-column prop="noticeNumber" fixed label="品名" align="center" width="100"></el-table-column>
@@ -177,9 +175,10 @@
         </template>
         <template slot="operation">
           <div class="operation-left">
-            <el-button type="primary" icon="el-icon-plus">添加工装件</el-button>
-            <el-button type="primary" icon="el-icon-edit">修改</el-button>
+             <el-button type="primary" icon="el-icon-plus" @click="fourAdd()">添加工装件</el-button>
+            <el-button type="primary" icon="el-icon-edit" @click="fourEdit()">修改工装件</el-button>
             <el-button type="primary" icon="el-icon-delete">删除</el-button>
+             <four-add ref="four"></four-add>
           </div>
         </template>
         <template slot="content">
@@ -194,7 +193,7 @@
             <el-table-column prop="state" label="状态"  align="center" width="120"></el-table-column>
             <el-table-column prop="remark" label="备注" align="center" min-width="120"></el-table-column>
           </el-table>
-        </template>
+        </template>   
       </layout>
     
     </el-tab-pane>
@@ -209,18 +208,21 @@ import { State, namespace } from 'vuex-class'
 import Layout from '@/views/_common/Layout.vue'
 import Look from './look.vue'
 import Distribute from './distribute.vue'
+import FourAdd from '../02/fourAdd.vue'
 
 @Component({
   components: {
     Layout,
     Look,
-    Distribute
+    Distribute,
+    FourAdd 
   }
 })
 export default class Index extends Vue {
   public $refs!: {
     look: any,
-    distribute: any
+    distribute: any,
+    four: any
   }
 
   s1: string = 's1'
@@ -322,6 +324,12 @@ basic:any[]=[{
   }
   edit() {
     this.$refs.distribute.open(false)
+  }
+   fourAdd() {
+    this.$refs.four.open(true)
+  }
+  fourEdit() {
+    this.$refs.four.open(false)
   }
   DoubleClick2(){}
 }

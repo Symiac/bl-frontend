@@ -37,14 +37,15 @@
                   :min="0"
                   :max="200"
                 ></el-input-number>
-                <el-button type="text" size="small" icon="el-icon-s-claim" :disabled="disable">单双机审核</el-button>
+                <el-button type="text" size="small" icon="el-icon-s-claim" :disabled="disable" @click="review()">单双机审核</el-button>
+                <el-button type="text" size="small" icon="el-icon-check" :disabled="disable" @click="success()">完工确认</el-button>
                 <el-button
                   type="text"
                   size="small"
                   icon="el-icon-warning-outline"
                   :disabled="disable"
+                  @click="stop()"
                 >终止</el-button>
-                <el-button type="text" size="small" icon="el-icon-check" :disabled="disable">完工确认</el-button>
                 <el-button type="text" icon="el-icon-delete" disabled>删除</el-button>
               </el-form-item>
             </el-row>
@@ -57,6 +58,7 @@
               :data="product"
               row-key="id"
             >
+            <el-table-column type="selection" fixed width="40"></el-table-column>
               <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
               <el-table-column prop="fillInDate" fixed label="工序名称" align="center" width="120"></el-table-column>
               <el-table-column prop="noticeNumber" label="部门" align="center" width="120"></el-table-column>
@@ -127,14 +129,15 @@
                   :min="0"
                   :max="200"
                 ></el-input-number>
-                <el-button type="text" size="small" icon="el-icon-s-claim" :disabled="disable">单双机审核</el-button>
+                <el-button type="text" size="small" icon="el-icon-s-claim" :disabled="disable" @click="review()">单双机审核</el-button>
+                <el-button type="text" size="small" icon="el-icon-check" :disabled="disable" @click="success()">完工确认</el-button>
                 <el-button
                   type="text"
                   size="small"
                   icon="el-icon-warning-outline"
                   :disabled="disable"
+                  @click="stop()"
                 >终止</el-button>
-                <el-button type="text" size="small" icon="el-icon-check" :disabled="disable">完工确认</el-button>
                 <el-button
                   type="text"
                   icon="el-icon-delete"
@@ -152,6 +155,7 @@
               :data="products"
               row-key="id"
             >
+            <el-table-column type="selection" fixed width="40"></el-table-column>
               <el-table-column type="index" fixed label="工序号" align="right" width="70"></el-table-column>
               <el-table-column prop="fillInDate" fixed label="工序名称" align="center" width="120"></el-table-column>
               <el-table-column prop="noticeNumber" label="部门" align="center" width="120"></el-table-column>
@@ -292,6 +296,75 @@ export default class DialogDetail extends Vue {
   }
   close() {
     this.visible = false
+  }
+  stop(){
+    this.$alert('您确定终止本派工单？', '错误提示', {
+      confirmButtonText: '确定',
+      type: 'error',
+      callback: action => {
+        // this.$message({
+        //   type: 'info',
+        //   message: `action: ${action}`
+        // })
+        if (action === 'confirm') {
+          this.$confirm('此操作将终止本派工单, 是否继续?', '操作提示', {
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            type: 'warning'
+          })
+            .then(() => {
+              this.$alert('已终止本派工单！', '操作成功', {
+                confirmButtonText: '确定',
+                type: 'success'
+              })
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消操作'
+              })
+            })
+        }
+      }
+    })
+  }
+  success(){
+     this.$confirm('是否更改派工单状态为完工?', '操作提示', {
+      cancelButtonText: '取消',
+      confirmButtonText: '确定',
+      type: 'warning'
+    })
+      .then(() => {
+        this.$alert('已确认完工！', '操作成功', {
+          confirmButtonText: '确定',
+          type: 'success'
+        })
+      })
+      .catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消确认'
+        })
+      })
+  }
+   review(){
+     this.$confirm('工序4【精车】设计为双机工序,操作者单机完成，如何计算工时？', '操作提示', {
+      cancelButtonText: '单机',
+      confirmButtonText: '双机',
+      type: 'warning'
+    })
+      .then(() => {
+        this.$alert('已确认按双击计算工时！', '操作成功', {
+          confirmButtonText: '确定',
+          type: 'success'
+        })
+      })
+      .catch(() => {
+        this.$alert('将按单机计算工时！', '操作成功', {
+          confirmButtonText: '确定',
+          type: 'success'
+        })
+      })
   }
   save() {
     this.visible = false

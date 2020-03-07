@@ -112,8 +112,7 @@
             <el-row>
               <el-form-item
                 label="派工单号"
-                style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px;"
-              >
+                style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px;">
                 <el-input
                   v-model="basics.danhao2"
                   placeholder="自动填充"

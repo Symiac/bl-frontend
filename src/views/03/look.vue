@@ -55,20 +55,35 @@
                   row-key="id"
                   style="margin-bottom: 10px; color:#000"
                 >
-                  <el-table-column prop="r" label="派工单号" align="center" width="100"></el-table-column>
-                   <el-table-column prop="dd" label="数量" align="center" width="120"></el-table-column>
+                  <el-table-column prop="f" label="通知单号" align="center" width="120"></el-table-column>
+                  <el-table-column prop="nn" label="产品工号" align="center" width="120"></el-table-column>
+                  <el-table-column prop="n" label="图号" align="center" width="120"></el-table-column>
+                  <el-table-column prop="p" label="产品名称" align="center" width="120"></el-table-column>
                   <el-table-column prop="or" label="填单日期" align="center" width="120"></el-table-column>
-                  <el-table-column prop="da" label="完工日期" align="center" min-width="100"></el-table-column>
-                  <el-table-column prop="f" label="通知单号" align="center" width="100"></el-table-column>
-                  <el-table-column prop="nn" label="产品工号" align="center" width="100"></el-table-column>
-                  <el-table-column prop="n" label="图号" align="center" width="100"></el-table-column>
-                  <el-table-column prop="p" label="产品名称" align="center" width="120"></el-table-column>  
+                  <el-table-column prop="da" label="完工日期" align="center" min-width="120"></el-table-column>
                 </el-table>
                 <el-row>
                   <el-form-item
-                    label="派工单"
-                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"
-                  ></el-form-item>
+                    label="派工单号"
+                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px;"
+                  >
+                    <el-input
+                      v-model="basics.danhao"
+                      placeholder="自动填充"
+                      size="small"
+                      style="width:150px"
+                      disabled
+                    ></el-input>
+                    <el-input-number
+                      v-model="basics.number1"
+                      placeholder="数量"
+                      size="small"
+                      style="width:150px;margin-left:20px"
+                      :min="0"
+                      :max="200"
+                      disabled
+                    ></el-input-number>
+                  </el-form-item>
                 </el-row>
 
                 <el-table
@@ -113,20 +128,34 @@
                   row-key="id"
                   style="margin-bottom: 10px; color:#000"
                 >
-                  <el-table-column prop="r" label="派工单号" align="center" width="100"></el-table-column>
-                  <el-table-column prop="f" label="通知单号" align="center" width="100"></el-table-column>
-                  <el-table-column prop="nn" label="产品工号" align="center" width="100"></el-table-column>
-                  <el-table-column prop="n" label="图号" align="center" width="100"></el-table-column>
+                  <el-table-column prop="f" label="通知单号" align="center" width="120"></el-table-column>
+                  <el-table-column prop="nn" label="产品工号" align="center" width="120"></el-table-column>
+                  <el-table-column prop="n" label="图号" align="center" width="120"></el-table-column>
                   <el-table-column prop="p" label="产品名称" align="center" width="120"></el-table-column>
-                  <el-table-column prop="dd" label="数量" align="center" width="120"></el-table-column>
                   <el-table-column prop="or" label="填单日期" align="center" width="120"></el-table-column>
-                  <el-table-column prop="da" label="完工日期" align="center" min-width="100"></el-table-column>
+                  <el-table-column prop="da" label="完工日期" align="center" min-width="120"></el-table-column>
                 </el-table>
                 <el-row>
                   <el-form-item
-                    label="派工单"
-                    style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 10px;"
-                  ></el-form-item>
+                label="派工单号"
+                style=" width:100%;font-weight:bold;background:#fafafa;margin-bottom: 0px;"
+              >
+                <el-input
+                  v-model="basics.danhao2"
+                  placeholder="自动填充"
+                  size="small"
+                  style="width:150px"
+                  disabled
+                ></el-input>
+                <el-input-number
+                  v-model="basics.number2"
+                  placeholder="数量"
+                  size="small"
+                  style="width:150px;margin-left:20px"
+                  :min="0"
+                  :max="200"
+                  disabled
+                ></el-input-number></el-form-item>
                 </el-row>
 
                 <el-table
@@ -274,9 +303,8 @@ import Layout from '@/views/_common/Layout.vue'
 export default class DialogDetail extends Vue {
   public $refs!: {}
 
-
-one:string ='one'
-two: string='one'
+  one: string = 'one'
+  two: string = 'one'
   visible: boolean = false
   disable: boolean = true
   title: string = '查看信息'
@@ -296,8 +324,12 @@ two: string='one'
     name: 'NP-700齿轮',
     number: '200',
     number1: '150',
+    danhao2: '2019002',
+    danhao: '2019001',
     number2: '50'
+   
   }
+ 
   product: any[] = [
     {
       orderNumber: ''
@@ -347,18 +379,16 @@ two: string='one'
     this.visible = false
   }
   show() {
-    this.two='one'
-    this.basic[0].r='2019001'
-     this.basic[0].dd='150'
-    this.one='t'
-    
+    this.two = 'one'
+    this.basic[0].r = '2019001'
+    this.basic[0].dd = '150'
+    this.one = 't'
   }
   show2() {
-    this.one='one'
-    this.basic[0].r='2019002'
-    this.basic[0].dd='50'
-    this.two='t'
-    
+    this.one = 'one'
+    this.basic[0].r = '2019002'
+    this.basic[0].dd = '50'
+    this.two = 't'
   }
   save() {
     this.visible = false
@@ -434,7 +464,7 @@ two: string='one'
   }
 }
 
-.one{
+.one {
   display: none;
 }
 </style>
